@@ -1,0 +1,50 @@
+/* page layout styles */
+
+body {
+    background-color:#000000;
+}
+
+
+@font-face
+{
+    /*Freeware*/
+font-family: Pipe Dream;
+src: url('Pipe_Dream_by_TRIFORCE89.ttf');
+}
+@font-face
+{
+    /*Freeware*/
+font-family: LCDPHONE;
+src: url('LCDPHONE.ttf');
+}
+@font-face
+{
+    /*Free for commercial use*/
+font-family: ka1;
+src: url('ka1.ttf');
+}
+@font-face
+{
+    /* https://fontstruct.com/fontstructions/show/165061/smoothie_iii_for_game_maker_1 */
+    /* author: Abyss01 */
+font-family: Smoothie-III-For-Game-Maker;
+src: url('Smoothie-III-For-Game-Maker.ttf');
+}
+@font-face
+{
+    /* free */
+font-family: BMfigaro;
+src: url('BMfigaro.ttf');
+}
+/*
+#canvas{
+width: 408px;
+height: 680px;
+}
+*/
+
+.container {
+    margin: 0px auto;
+    overflow: hidden;
+    width: 480px;
+}
