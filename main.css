@@ -1,9 +1,14 @@
 /* page layout styles */
 
-body {
-    background-color:#000000;
+.container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
+body {
+    background-color: #000000;
+}
 
 @font-face
 {
@@ -35,16 +40,4 @@ src: url('Smoothie-III-For-Game-Maker.ttf');
     /* free */
 font-family: BMfigaro;
 src: url('BMfigaro.ttf');
-}
-/*
-#canvas{
-width: 408px;
-height: 680px;
-}
-*/
-
-.container {
-    margin: 0px auto;
-    overflow: hidden;
-    width: 480px;
 }
