@@ -5,14 +5,110 @@
 		<title>arKanoid</title>
 		<link href="main.css" rel="stylesheet" type="text/css" />
 	</head>
-	<body>
-		<div class="container">
-			<canvas id="canvas">
-				Your browser does not support the HTML5 Canvas. Please update your browser.
-			</canvas>
+<body>
+	<div class="container">
+		<canvas id="canvas">
+			Your browser does not support the HTML5 Canvas. Please update your browser.
+		</canvas>
+		<div id="menus">
+			<h1>arKanoid</h1>
+			<div id="main-menu">
+				<p onclick="start_game()">Play</p>
+				<p onclick="controls()">Controlls</p>
+				<p onclick="sound()">Sound</p>
+			</div>
+			<div id="controlls" class="options">
+				<form>
+					<h2>Mobile:</h2>
+					<input type="radio" name="controls" checked="checked" id="touch">
+					<label for="touch">
+						<span></span> Touch</label>
+					<br>
+					<br>
+					<input type="radio" name="controls" id="gyro">
+					<label for="gyro">
+						<span></span> Gyroscope</label>
+					<br>
+				</form>
+				<form>
+					<h2>Desktop:</h2>
+					<input type="radio" name="controls" checked="checked" id="mouse">
+					<label for="mouse">
+						<span></span> Mouse</label>
+					<br>
+					<br>
+					<input type="radio" name="controls" id="keybord">
+					<label for="keybord">
+						<span></span> Keybord</label>(arrows & space)
+					<br>
+				</form>
+				<br>
+				<p onclick="bck_main()">&lt BACK</p>
+			</div>
+			<form id="sound-options" class="options">
+				<h2>Sound Options</h2>
+				<br>
+				<input type="checkbox" checked="checked" name="music" id="music">
+				<label for="music">
+					<span></span> Music</label>
+				<br>
+				<br>
+				<input type="checkbox" checked="checked" name="sound" id="sound">
+				<label for="sound">
+					<span></span> Sound FX</label>
+				<br>
+				<br>
+				<p onclick="bck_main()">
+					&lt BACK</p>
+			</form>
 		</div>
-		<script>
-		//Created by Konrad Kisiel
+		<div id="bck_to_menu">
+			<p onclick="bck_to_menu()">
+				&lt BACK</p>
+		</div>
+	</div>
+	<script>
+		var startBool = false;
+		function play_sound(sound) {
+			if (document.getElementById("sound").checked) {
+				sound.play();
+			} else {
+				sound.pause();
+			}
+		}
+		function start_game(e) {
+			document.getElementById("menus").style = "display: none";
+			document.getElementById("bck_to_menu").style = "display: block";
+			if (document.getElementById("music").checked) {
+				soundtrack.play();
+			} else {
+				soundtrack.pause();
+			}
+			startBool = true;
+			e.stopPropagation(); // not working
+		}
+		function controls() {
+			document.getElementById("main-menu").style = "display: none";
+			document.getElementById("controlls").style = "display: block";
+		}
+		function sound() {
+			document.getElementById("main-menu").style = "display: none";
+			document.getElementById("sound-options").style = "display: block";
+		}
+		function bck_main() {
+			document.getElementById("sound-options").style = "display: none";
+			document.getElementById("controlls").style = "display: none";
+			document.getElementById("main-menu").style = "display: block";
+		}
+		function bck_to_menu() {
+			startBool = false;
+			document.getElementById("menus").style = "display: block";
+			document.getElementById("sound-options").style = "display: none";
+			document.getElementById("controlls").style = "display: none";
+			document.getElementById("bck_to_menu").style = "display: none";
+		}
+	</script>
+	<script>
 		var c = canvas.getContext('2d');
 		c.canvas.height = window.innerHeight;
 		c.canvas.width = c.canvas.height / 1.6;
@@ -20,7 +116,8 @@
 		var H = c.canvas.height;
 
 		var gameLoop;
-		var DeskMove;
+		var ballStartPsn = true;
+		var PaddleMove;
 
 		var top_line = H / 19;
 		var bot_line = H / 5.5;
@@ -30,13 +127,13 @@
 		// audio sources
 		var soundtrack = new Audio("golucky.mp3");
 		var edge_s = new Audio("edges.wav");
-		var edge_top = new Audio("edge_top.wav");
+		var edge_top_s = new Audio("edge_top.wav");
 		var brick_s = new Audio("brick.wav");
-		var desk_s = new Audio("desk.wav");
+		var paddle_s = new Audio("paddle.wav");
 		var delbrick_s = new Audio("delbrick.wav");
 		var liveloss_s = new Audio("liveloss.wav");
-		var NextLevel_s = new Audio("NewLevel.wav");
-		var Win_s = new Audio("win.wav");
+		var nextLevel_s = new Audio("NewLevel.wav");
+		var win_s = new Audio("win.wav");
 		//********Counters*********	 
 		var score = 0;
 		var lives = 7;
@@ -86,7 +183,7 @@
 			c.font = W / 9.6 + "px LCDPHONE";
 			c.fillText("YOU WIN", W * 0.27, H * 0.94);
 			soundtrack.pause();
-			Win_s.play();
+			play_sound(win_s);
 		}
 
 		function Info() {
@@ -95,65 +192,136 @@
 		}
 
 		//*******Paddle*******     
-		var DeskW = H / 6;
-		var DeskH = H / 47;
-		var DeskDeltaX = 0;
-		var DeskDeltaY = 0;
-		var DeskX = W / 2 - DeskW / 2;
-		var DeskY = H - DeskH - bot_line - W / 60;
+		var PaddleW = H / 6;
+		var PaddleH = H / 47;
+		var PaddleDeltaX = 0;
+		var PaddleDeltaY = 0;
+		var PaddleX = W / 2 - PaddleW / 2;
+		var PaddleY = H - PaddleH - bot_line - W / 60;
 
-		function drawDesk() {
+		function drawPaddle() {
 			c.save();
 			c.beginPath();
-			c.moveTo(DeskX, DeskY + DeskH);
-			c.lineTo(DeskX, DeskY);
-			c.lineTo(DeskX + DeskW, DeskY);
-			c.lineTo(DeskX + DeskW, DeskY + DeskH);
+			c.moveTo(PaddleX, PaddleY + PaddleH);
+			c.lineTo(PaddleX, PaddleY);
+			c.lineTo(PaddleX + PaddleW, PaddleY);
+			c.lineTo(PaddleX + PaddleW, PaddleY + PaddleH);
 			c.fillStyle = "rgb(0, 64, 98)";
 			c.fill();
 			c.lineWidth = 3;
 			c.strokeStyle = "rgb(0, 0, 0)";
 			c.stroke();
 			c.beginPath();
-			c.moveTo(DeskX - 1, DeskY - 1);
-			c.lineTo(DeskX + 14, DeskY - 7);
-			c.lineTo(DeskX + DeskW - 14, DeskY - 7);
-			c.lineTo(DeskX + DeskW + 1, DeskY - 1);
+			c.moveTo(PaddleX - 1, PaddleY - 1);
+			c.lineTo(PaddleX + 14, PaddleY - 7);
+			c.lineTo(PaddleX + PaddleW - 14, PaddleY - 7);
+			c.lineTo(PaddleX + PaddleW + 1, PaddleY - 1);
 			c.fillStyle = "rgb(0, 128, 196)";
 			c.fill();
 			c.lineWidth = 2;
 			c.strokeStyle = "rgb(0, 0, 0)";
 			c.stroke();
 			c.restore();
-
 		}
 
-		var DeskDeltaX;
-		var DeskSpeedX = W / 37;
+		var PaddleDeltaX;
+		var PaddleSpeedX = W / 37;
 
-		function moveDesk() {
-			if (DeskMove == 'LEFT') {
-				DeskDeltaX = -DeskSpeedX;
-			} else if (DeskMove == 'RIGHT') {
-				DeskDeltaX = DeskSpeedX;
-			} else {
-				DeskDeltaX = 0;
+		function movePaddle() {
+			if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1)) {
+
+				document.addEventListener("touchmove", function (e) {
+					if (document.getElementById("touch").checked) {
+						PaddleX = event.targetTouches[0].clientX;
+					}
+					else{  // ??? maybe not necessary
+						e.preventDefault();
+					}
+				}, false);
+
+				window.addEventListener('deviceorientation', function (e) {
+					if (document.getElementById("gyro").checked) {
+						PaddleDeltaX = event.gamma * 4;
+					}else{  // ??? maybe not necessary
+						e.preventDefault();
+					}
+				});
 			}
+			else {
+				document.addEventListener("mousemove", function (e) {
+					if (document.getElementById("mouse").checked) {
+						var mouseX = e.clientX - (window.innerWidth / 2);
+						if (mouseX > 20 && mouseX < 430) {
+							PaddleX = mouseX;
+						} else if (mouseX <= 20) {
+							PaddleX = 20;
+						}
+						else if (mouseX >= 430) {
+							PaddleX = 430;
+						}
+					}
+				}, false);
+
+				// Start Tracking Keystokes
+				document.addEventListener('keydown', function (e) {
+					if (document.getElementById("keybord").checked) {
+						if (e.keyCode == 39) {
+							PaddleDeltaX = PaddleSpeedX;
+						} else if (e.keyCode == 37) {
+							PaddleDeltaX = -PaddleSpeedX;
+						}
+					}else{  // ??? maybe not necessary
+						e.preventDefault();
+					}
+				});
+
+				document.addEventListener('keyup', function (e) {
+					if (document.getElementById("keybord").checked) {
+						if (e.keyCode == 39 || e.keyCode == 37) {
+							PaddleDeltaX = 0;
+						}
+					}else{  // ??? maybe not necessary
+						e.preventDefault();
+					}
+				});
+
+				document.addEventListener('keyup', function (e) {
+					if (document.getElementById("keybord").checked) {
+						if (e.keyCode == 32 && ballStartPsn) {
+							BallDeltaY = 4;
+							BallDeltaX = 0;
+							ballStartPsn = false;
+						}
+					}else{  // ??? maybe not necessary
+						e.preventDefault();
+					}
+				});
+
+			}
+			document.addEventListener("click", function (e) {
+				if (!document.getElementById("keybord").checked) {
+					if (ballStartPsn) {
+						BallDeltaY = 4;
+						BallDeltaX = 0;
+						ballStartPsn = false;
+					}
+				}
+			});
 			// If paddle reaches the ends of ball, then don't let it move 
 			if (BallDeltaY == 0) {
-				if (DeskX + DeskDeltaX < W / 2 - DeskW || DeskX + DeskDeltaX + DeskW > W / 2 + DeskW) {
-					DeskDeltaX = 0;
+				if (PaddleX + PaddleDeltaX < W / 2 - PaddleW || PaddleX + PaddleDeltaX + PaddleW > W / 2 + PaddleW) {
+					PaddleDeltaX = 0;
 				}
 			}
 			// If paddle reaches the ends, then don't let it move 
-			if (DeskX + DeskDeltaX < 0 || DeskX + DeskDeltaX + DeskW > W) {
-				DeskDeltaX = 0;
+			if (PaddleX + PaddleDeltaX < 0 || PaddleX + PaddleDeltaX + PaddleW > W) {
+				PaddleDeltaX = 0;
 			}
-			DeskX = DeskX + DeskDeltaX;
+			PaddleX = PaddleX + PaddleDeltaX;
 		}
 
 		//********Ball************
-		var BallSpeed = W / 150;
+		var BallSpeed = W / 200;
 		var BallX = W / 2 + (W / 800 * Math.random());
 		var BallY = H - bot_line - W / 8;
 		var BallR = W / 48;
@@ -184,7 +352,7 @@
 
 			if (BallY + BallDeltaY - BallR < top_line || collisionYWithBricks()) {
 				BallDeltaY = -BallDeltaY;
-				brick_s.play();
+				play_sound(brick_s);
 			}
 
 			// top bouncing effect
@@ -199,7 +367,7 @@
 				c.fill();
 				c.lineWidth = 1.3 * bord;
 				c.stroke();
-				edge_top.play();
+				play_sound(edge_top_s);
 			}
 			// If the bottom of the Ball touches the bottom of the screen then end the game
 			if (BallY + BallDeltaY + BallR > H - bot_line - 14) {
@@ -215,7 +383,7 @@
 					c.fill();
 					c.lineWidth = 2 * bord;
 					c.stroke();
-					liveloss_s.play();
+					play_sound(liveloss_s);
 					startBall();
 					// BallDeltaY = -BallDeltaY;		
 				}
@@ -229,7 +397,7 @@
 				//or right side of Ball moves too far right
 				(BallX + BallDeltaX + BallR + 18 >= W) || collisionXWithBricks()) {
 				BallDeltaX = -BallDeltaX;
-				edge_s.play();
+				play_sound(edge_s);
 			}
 			//left side bounce effect
 			if (BallX + BallDeltaX - BallR - per <= 10) {
@@ -263,33 +431,18 @@
 
 			}
 
-
 			// if bottom of Ball reaches the top of paddle,
-			if (BallY + BallDeltaY + BallR >= DeskY) {
+			if (BallY + BallDeltaY + BallR >= PaddleY) {
 				// and it is positioned between the two ends of the paddle (is on top)
-				if (BallX + BallDeltaX + BallR >= DeskX &&
-					BallX + BallDeltaX - BallR <= DeskX + DeskW) {
-					BallDeltaX = BallDeltaX / 2.5 + ((BallX + BallDeltaX) - (DeskX + DeskW / 2)) / (DeskW / 4.4)
+				if (BallX + BallDeltaX + BallR >= PaddleX &&
+					BallX + BallDeltaX - BallR <= PaddleX + PaddleW) {
+					BallDeltaX = BallDeltaX / 2.5 + ((BallX + BallDeltaX) - (PaddleX + PaddleW / 2)) / (PaddleW / 4.4)
 					BallDeltaY = - BallDeltaY
-					desk_s.play();
+					play_sound(paddle_s);
 				}
 			}
 			c.restore();
 
-			/*
-								c.beginPath();
-								c.moveTo(BallDeltaX+BallX,H);
-								c.lineTo(BallDeltaX+BallX,0);
-								c.lineWidth = 1;
-								c.strokeStyle ="rgb(0, 68, 255)";
-								c.stroke();
-								
-								c.beginPath();
-								c.moveTo(BallX,H);
-								c.lineTo(BallX,0);
-								c.lineWidth = 1;
-								c.strokeStyle ="rgb(0, 68, 255)";
-								c.stroke();*/
 			// Move the Ball
 			BallX = BallX + BallDeltaX * BallSpeed;
 			BallY = BallY + BallDeltaY * BallSpeed;
@@ -441,21 +594,22 @@
 
 		// set starting ball position
 		function startBall() {
+			ballStartPsn = true;
 			BallDeltaY = 0;
 			BallDeltaX = 0;
-			DeskDeltaX = 0;
-			BallX = W / 2 + DeskDeltaX;
+			PaddleDeltaX = 0;
+			BallX = W / 2 + PaddleDeltaX;
 			BallY = H - bot_line - W / 8;
-			DeskX = W / 2 - DeskW / 2;
+			PaddleX = W / 2 - PaddleW / 2;
 		}
 
 		function newLevel() {
 			startBall();
 			score = score + 10;
 			lives = lives + 2;
-			DeskW = H / 6 - DeskW / 9;
-			BallSpeed = BallSpeed + DeskW / 1000;
-			NextLevel_s.play();
+			PaddleW = H / 6 - PaddleW / 9;
+			BallSpeed = BallSpeed + PaddleW / 1000;
+			play_sound(nextLevel_s);
 		}
 		// draw a single brick
 		function drawBrick(x, y, type) {
@@ -572,7 +726,7 @@
 			} else {
 				// give player an extra point when the brick disappears
 				score += 2;
-				delbrick_s.play();
+				play_sound(delbrick_s);
 			}
 		}
 
@@ -580,57 +734,16 @@
 		function startGame() {
 			soundtrack.addEventListener('ended', function () {
 				this.currentTime = 0;
+				/********************************************** CHECK IT *********************************************************************************/
 				this.play();
 			}, false);
-			/*
-// http://www.albertosarullo.com/blog/javascript-accelerometer-demo-source
-window.ondevicemotion = function(event) {
-var accelerationX = event.accelerationIncludingGravity.x;
-var accelerationY = event.accelerationIncludingGravity.y;
-var accelerationZ = event.accelerationIncludingGravity.z;
-}
-*/
 
 			BallDeltaY = 0;
 			BallDeltaX = 0;
-			DeskDeltaX = 0;
+			PaddleDeltaX = 0;
 
 			// call the update() function every 20ms until clearInterval(gameLoop) is called
 			gameLoop = setInterval(update, 20);
-
-			// Start Tracking Keystokes
-			document.addEventListener('keydown', function (e) {
-				if (e.keyCode == 39) {
-					DeskMove = 'RIGHT';
-				} else if (e.keyCode == 37) {
-					DeskMove = 'LEFT';
-				}
-			});
-
-			document.addEventListener('keyup', function (e) {
-				if (e.keyCode == 39) {
-					DeskMove = 'NONE';
-				} else if (e.keyCode == 37) {
-					DeskMove = 'NONE';
-				}
-			});
-
-	document.addEventListener('touchstart', function (e) {
-				if (e.keyCode == 16) {
-					BallDeltaY = 4;
-					BallDeltaX = 0;
-					soundtrack.play();
-				}
-			});
-
-			document.addEventListener('keyup', function (e) {
-				if (e.keyCode == 16) {
-					BallDeltaY = 4;
-					BallDeltaX = 0;
-					soundtrack.play();
-				}
-			});
-
 		}
 
 		var bord = H / 533;
@@ -678,7 +791,6 @@ var accelerationZ = event.accelerationIncludingGravity.z;
 			c.fillStyle = "rgb(196, 196, 255)";
 			c.fill();
 			c.stroke();
-
 			//borders	 
 			//top
 			c.fillStyle = "rgb(75, 0, 130)";
@@ -730,11 +842,13 @@ var accelerationZ = event.accelerationIncludingGravity.z;
 			c.stroke();
 			c.restore();
 
-			moveBall();
-			moveDesk();
-			drawDesk();
-			drawBall();
-			createBricks();
+			if (startBool) {
+				moveBall();
+				movePaddle();
+				drawPaddle();
+				drawBall();
+				createBricks();
+			}
 			Counters();
 			//Info();
 		}

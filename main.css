@@ -4,6 +4,8 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    font-family: LCDPHONE, monospace;
+    color: rgb(255, 128, 0);
 }
 
 body {
@@ -40,4 +42,103 @@ src: url('Smoothie-III-For-Game-Maker.ttf');
     /* free */
 font-family: BMfigaro;
 src: url('BMfigaro.ttf');
+}
+
+
+/* ***************** MENU **********************/
+
+#menus {
+    position: fixed;
+    transform: translateX(-50%);
+    top: 4%;
+    left: 50%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 7vh;
+}
+
+h2 {
+    font-size: 3.3vh;
+    border-bottom: 4px dashed rgb(255, 128, 0);
+    text-align: center;
+}
+
+input:hover,
+p:hover {
+    cursor: pointer;
+}
+
+#main-menu {
+    font-size: 5vh;
+    margin-top: 50%;
+}
+
+.options {
+    display: none;
+    text-align: left;
+}
+
+#controlls {
+    margin-top: 15%;
+}
+
+#sound-options {
+    margin-top: 43%;
+}
+
+#bck_to_menu {
+    position: fixed;
+    top: 4%;
+    left: 6%;
+    display: none;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked+label,
+input[type="radio"]:checked+label {
+    color: rgb(255, 128, 0);
+}
+
+input[type="checkbox"]+label span,
+input[type="radio"]+label span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 2vh;
+    height: 2vh;
+    background: none;
+    border-radius: 0.5vh;
+    border: 0.2vh solid rgb(255, 128, 0);
+}
+
+input[type="radio"]+label span {
+    border-radius: 100%;
+}
+
+input[type="checkbox"]+label span::before {
+    content: "";
+    display: block;
+}
+
+input[type="checkbox"]:checked+label span::before {
+    background-color: rgb(255, 128, 0);
+    width: 2vh;
+    height: 2vh;
+    border-radius: 0.3vh;
+}
+
+input[type="radio"]:checked+label span {
+    background-color: rgb(255, 128, 0);
+    width: 2vh;
+    height: 2vh;
+    border: 0.2vh solid rgb(255, 128, 0);
 }
