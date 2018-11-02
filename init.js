@@ -19,7 +19,7 @@ var paddle_s = new Audio("paddle.wav");
 var delbrick_s = new Audio("delbrick.wav");
 var liveloss_s = new Audio("liveloss.wav");
 var nextLevel_s = new Audio("newLevel.wav");
-var win_s = new Audio("win.wav");
+var win_s = new Audio("win.mp3");
 
 //******** Game initial setings *********	
 

@@ -1,20 +1,12 @@
-//**********Levels******************
-
 var bricksRow = 18;
 var brickHeight = H / 50;
 var brickWidth = W / bricksRow;
 
-// iterate through the bricks array and draw each brick using drawBrick()
-function createBricks() {
-	for (var i = 0; i < bricks.length; i++) {
-		for (var j = 0; j < bricks[i].length; j++) {
-			drawBrick(j, i, bricks[i][j]);
-		}
-	}
-}
+//**********Levels******************
 
+var lvls = [
 //Lvl1
-var bricks = [
+[
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -38,9 +30,9 @@ var bricks = [
 	[0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
 	[0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
+],
 //Lvl2
-var bricks1 = [
+[
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,9 +56,9 @@ var bricks1 = [
 	[0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0],
 	[0, 0, 2, 0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 0, 2, 2, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
+],
 //Lvl3
-var bricks2 = [
+[
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -90,9 +82,9 @@ var bricks2 = [
 	[0, 3, 0, 0, 0, 0, 3, 0, 0, 3, 3, 0, 3, 0, 0, 3, 0, 0],
 	[0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3, 0, 0, 0, 3, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
+],
 //Lvl4
-var bricks3 = [
+[
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -116,8 +108,8 @@ var bricks3 = [
 	[0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
 	[0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
-
+]
+]
 /* Plain LVL
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -144,33 +136,55 @@ var bricks3 = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 */
 
-
-
-function newLevel() {
-	startBall();
-	score = score + 10;
-	lives = lives + 2;
-	PaddleW = H / 6 - PaddleW / 9;
-	BallSpeed = BallSpeed + PaddleW / 1000;
-	play_sound(nextLevel_s);
+//sum all numbers in array
+function sumArray(inputArray){
+	var sum = 0;
+	for(i=0; i<inputArray.length; i++){
+        for(j=0; j<inputArray[i].length; j++){
+            if(inputArray[i][j] !== 0){
+		        sum += inputArray[i][j];
+            }
+        }
+	}
+	return sum;
 }
+
+var lvlCounter = 0;
+var bricks = lvls[lvlCounter];
+
+function setLvl(){
+	drawBricks(bricks);
+	//check if there is no more bricks at a screen
+	if (sumArray(bricks) == 0){
+	lvlCounter++;
+		//if there is no more levels, win a game
+		if(lvlCounter == lvls.length){
+			winGame();
+		//set up a new level
+		}else{
+			startBall();
+			score = score + 10;
+			lives = lives + 2;
+			//take new lvl array
+			bricks = lvls[lvlCounter];
+			PaddleW = H / 6 - PaddleW / 9;
+			BallSpeed = BallSpeed + PaddleW / 1000;
+			play_sound(nextLevel_s);
+		}
+	}
+}
+
+// iterate through the bricks array and draw each brick using drawSingleBrick()
+function drawBricks(bricks) {
+	for (var i = 0; i < bricks.length; i++) {
+		for (var j = 0; j < bricks[i].length; j++) {
+			drawSingleBrick(j, i, bricks[i][j]);
+		}
+	}
+}
+
 // draw a single brick
-function drawBrick(x, y, type) {
-	if (score == 64) {
-		bricks = bricks1;
-		newLevel();
-	}
-	else if (score == 161) {
-		bricks = bricks2;
-		newLevel();
-	}
-	else if (score == 319) {
-		bricks = bricks3;
-		newLevel();
-	}
-	else if (score == 520) {
-		passGame();
-	}
+function drawSingleBrick(x, y, type) {
 	switch (type) { // if brick is still visible; three colours for three types of bricks
 		case 0:
 			c.fillStyle = "rgb(0,0,0)";
@@ -191,8 +205,8 @@ function drawBrick(x, y, type) {
 			c.translate(50, 0);
 			c.fillRect(x * brickWidth, y * brickHeight, brickWidth, brickHeight);
 			break;
-
 	}
+
 	if (type) {
 		//Draw rectangle with fillStyle color selected earlier
 		c.strokeStyle = "rgb(0, 0, 0)";

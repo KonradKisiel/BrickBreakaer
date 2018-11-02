@@ -113,7 +113,7 @@ function movePaddle() {
 			}
 		}
 	});
-	// If paddle reaches the ends of ball, then don't let it move 
+	// If paddle reaches the ends of the ball position, then don't let it move 
 	if (BallDeltaY == 0) {
 		if (PaddleX + PaddleDeltaX < W / 2 - PaddleW || PaddleX + PaddleDeltaX + PaddleW > W / 2 + PaddleW) {
 			PaddleDeltaX = 0;
