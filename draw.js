@@ -114,7 +114,7 @@ function drawBricks(bricksArray) {
 
 /* ************************** BORDERS **************************** */
 
-function drawTopBorder(fillStyle, strokeStyle) {
+function drawTopBorder() {
     c.save();
     //c.fillStyle = fillStyle;
     //c.strokeStyle = strokeStyle;
@@ -132,7 +132,7 @@ function drawTopBorder(fillStyle, strokeStyle) {
 
 }
 
-function drawBottomBorder(fillStyle, strokeStyle) {
+function drawBottomBorder() {
     c.save();
     //c.fillStyle = fillStyle;
     //c.strokeStyle = strokeStyle;
@@ -148,7 +148,7 @@ function drawBottomBorder(fillStyle, strokeStyle) {
     c.restore();
 }
 
-function drawRightBorder(fillStyle, strokeStyle) {
+function drawRightBorder() {
     c.save();
     //c.fillStyle = fillStyle;
     //c.strokeStyle = strokeStyle;
@@ -165,7 +165,7 @@ function drawRightBorder(fillStyle, strokeStyle) {
     c.restore();
 }
 
-function drawLeftBorder(fillStyle, strokeStyle) {
+function drawLeftBorder() {
     c.save();
     //c.fillStyle = fillStyle;
     //c.strokeStyle = strokeStyle;
@@ -180,33 +180,3 @@ function drawLeftBorder(fillStyle, strokeStyle) {
     c.stroke();
     c.restore();
 }
-
-/* ************************** HIGHLIGHTED BORDERS **************************** */
-/*
-function drawHighlightedTopBorder() {
-    c.beginPath();
-    c.moveTo(per + bord / 2, top_line - bord);
-    c.lineTo(W - per - bord / 2, top_line - bord);
-    c.lineTo(W - borderX, top_line + borderYT);
-    c.lineTo(borderX, top_line + borderYT);
-    c.lineTo(per + bord / 2, top_line - bord);
-    c.closePath();
-    c.fill();
-    c.lineWidth = 1.3 * bord;
-    c.stroke();
-    play_sound(edge_top_s);
-}
-
-function drawHighlightedBottomBorder() {
-    c.beginPath();
-    c.moveTo(bord, H - bot_line);
-    c.lineTo(W - bord, H - bot_line);
-    c.lineTo(W - borderX, H - bot_line - borderYB);
-    c.lineTo(borderX, H - bot_line - borderYB);
-    c.closePath();
-    c.fillStyle = "rgb(148, 0, 255)";
-    c.fill();
-    c.lineWidth = 2 * bord;
-    c.stroke();
-}
-*/

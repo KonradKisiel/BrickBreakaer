@@ -14,11 +14,13 @@ function startGame() {
 }
 */
 
+soundtrack.addEventListener('ended', function () {
+	this.currentTime = 0;
+	this.play();
+}, false);
+
+movePaddle();
 function update() {
-	soundtrack.addEventListener('ended', function () {
-		this.currentTime = 0;
-		this.play();
-	}, false);
 
 	drawBackground();
 	drawBottomScreen();
@@ -35,7 +37,6 @@ function update() {
 	drawLeftBorder();
 
 	if (startBool) {
-		movePaddle();
 		moveBall();
 		drawPaddle();
 		drawBall();
