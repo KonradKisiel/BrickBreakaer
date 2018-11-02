@@ -1,7 +1,3 @@
-var bricksRow = 18;
-var brickHeight = H / 50;
-var brickWidth = W / bricksRow;
-
 //**********Levels******************
 
 var lvls = [
@@ -136,7 +132,7 @@ var lvls = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 */
 
-//sum all numbers in array
+//sum all numbers in an array
 function sumArray(inputArray){
 	var sum = 0;
 	for(i=0; i<inputArray.length; i++){
@@ -147,71 +143,4 @@ function sumArray(inputArray){
         }
 	}
 	return sum;
-}
-
-var lvlCounter = 0;
-var bricks = lvls[lvlCounter];
-
-function setLvl(){
-	drawBricks(bricks);
-	//check if there is no more bricks at a screen
-	if (sumArray(bricks) == 0){
-	lvlCounter++;
-		//if there is no more levels, win a game
-		if(lvlCounter == lvls.length){
-			winGame();
-		//set up a new level
-		}else{
-			startBall();
-			score = score + 10;
-			lives = lives + 2;
-			//take new lvl array
-			bricks = lvls[lvlCounter];
-			PaddleW = H / 6 - PaddleW / 9;
-			BallSpeed = BallSpeed + PaddleW / 1000;
-			play_sound(nextLevel_s);
-		}
-	}
-}
-
-// iterate through the bricks array and draw each brick using drawSingleBrick()
-function drawBricks(bricks) {
-	for (var i = 0; i < bricks.length; i++) {
-		for (var j = 0; j < bricks[i].length; j++) {
-			drawSingleBrick(j, i, bricks[i][j]);
-		}
-	}
-}
-
-// draw a single brick
-function drawSingleBrick(x, y, type) {
-	switch (type) { // if brick is still visible; three colours for three types of bricks
-		case 0:
-			c.fillStyle = "rgb(0,0,0)";
-			break;
-		case 1:
-			c.fillStyle = "rgba(64,172,0,0.8)";
-			break;
-		case 2:
-			c.fillStyle = "rgba(0,176,148,0.8)";
-			break;
-		case 3:
-			c.fillStyle = "rgba(255,128,0,0.8)";
-			break;
-		case 4:
-			c.fillStyle = "rgba(196,32,0,0.8)";
-			break;
-		default:
-			c.translate(50, 0);
-			c.fillRect(x * brickWidth, y * brickHeight, brickWidth, brickHeight);
-			break;
-	}
-
-	if (type) {
-		//Draw rectangle with fillStyle color selected earlier
-		c.strokeStyle = "rgb(0, 0, 0)";
-		c.strokeRect(x * brickWidth, y * brickHeight, brickWidth, brickHeight);
-		// Also draw blackish border around the brick
-		c.fillRect(x * brickWidth + 2, y * brickHeight + 2, brickWidth - 4, brickHeight - 4);
-	}
 }

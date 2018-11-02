@@ -28,10 +28,13 @@ var ballStartPsn = true;
 
 
 //********Counters*********	 
+
 var score = 0;
 var lives = 7;
+var lvlCounter = 0;
 
 // ************ Paddle settings ************
+
 var PaddleMove;
 var PaddleW = H / 6;
 var PaddleH = H / 47;
@@ -56,5 +59,11 @@ var BallDeltaY;
 var bricksRow = 18;
 var brickHeight = H / 50;
 var brickWidth = W / bricksRow;
+
+//************** Start Positions ***********/
+
+BallDeltaY = 0;
+BallDeltaX = 0;
+PaddleDeltaX = 0;
 
 

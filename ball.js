@@ -1,30 +1,17 @@
-//********Ball************
-var BallSpeed = W / 200;
-var BallX = W / 2 + (W / 800 * Math.random());
-var BallY = H - bot_line - W / 8;
-var BallR = W / 48;
-var BallDeltaX;
-var BallDeltaY;
-
-function drawBall() {
-	c.save();
-	c.beginPath();
-	c.arc(BallX, BallY, BallR, 0, Math.PI * 2);
-	c.fillStyle = "rgb(0,68,255)";
-	c.fill();
-	c.strokeStyle = "rgb(0,0,0)";
-	c.lineWidth = 3;
-	c.stroke();
-	c.beginPath();
-	c.arc(BallX - 2, BallY - 2, BallR - 5, 0, Math.PI * 2);
-	c.strokeStyle = "rgb(0,128,255)";
-	c.fillStyle = "rgb(0,128,255)";
-	c.fill();
-	c.restore();
+// set starting ball position
+function startBall() {
+	ballStartPsn = true;
+	BallDeltaY = 0;
+	BallDeltaX = 0;
+	PaddleDeltaX = 0;
+	BallX = W / 2 + PaddleDeltaX;
+	BallY = H - bot_line - W / 8;
+	PaddleX = W / 2 - PaddleW / 2;
 }
 
 function moveBall() {
 	c.save();
+	//set highlighted borders color
 	c.fillStyle = "rgb(0, 192, 192)";
 	c.strokeStyle = "rgb(0, 0, 0)";
 
@@ -35,32 +22,13 @@ function moveBall() {
 
 	// top bouncing effect
 	if (BallY + BallDeltaY - BallR < top_line + 12) {
-		c.beginPath();
-		c.moveTo(per + bord / 2, top_line - bord);
-		c.lineTo(W - per - bord / 2, top_line - bord);
-		c.lineTo(W - borderX, top_line + borderYT);
-		c.lineTo(borderX, top_line + borderYT);
-		c.lineTo(per + bord / 2, top_line - bord);
-		c.closePath();
-		c.fill();
-		c.lineWidth = 1.3 * bord;
-		c.stroke();
-		play_sound(edge_top_s);
+		drawTopBorder();
 	}
 	// If the bottom of the Ball touches the bottom of the screen then end the game
 	if (BallY + BallDeltaY + BallR > H - bot_line - 14) {
 		if (lives > 0) {
 			lives--;
-			c.beginPath();
-			c.moveTo(bord, H - bot_line);
-			c.lineTo(W - bord, H - bot_line);
-			c.lineTo(W - borderX, H - bot_line - borderYB);
-			c.lineTo(borderX, H - bot_line - borderYB);
-			c.closePath();
-			c.fillStyle = "rgb(148, 0, 255)";
-			c.fill();
-			c.lineWidth = 2 * bord;
-			c.stroke();
+			drawBottomBorder();
 			play_sound(liveloss_s);
 			startBall();
 			// BallDeltaY = -BallDeltaY;		
@@ -79,34 +47,12 @@ function moveBall() {
 	}
 	//left side bounce effect
 	if (BallX + BallDeltaX - BallR - per <= 10) {
-		c.beginPath();
-		c.moveTo(per, top_line);
-		c.lineTo(bord, H - bot_line);
-		c.lineTo(borderX, H - bot_line - borderYB);
-		c.lineTo(borderX, top_line + borderYT);
-		c.lineTo(per, top_line);
-		c.closePath();
-		c.fill();
-		c.lineWidth = 1.5 * bord;
-		c.strokeStyle = "rgb(0, 0, 0)";
-		c.stroke();
+		drawLeftBorder();
 	}
 
 	//right	side bounce effect
 	if (BallX + BallDeltaX + BallR + per >= W - 10) {
-		c.beginPath();
-		c.moveTo(W - per, top_line);
-		c.lineTo(W - bord, H - bot_line);
-		c.lineTo(W - borderX, H - bot_line - borderYB);
-		c.lineTo(W - borderX, top_line + borderYT);
-		c.lineTo(W - per, top_line);
-		c.closePath();
-		c.fillStyle = "rgb(0, 192, 192)";
-		c.fill();
-		c.lineWidth = 1.5 * bord;
-		c.strokeStyle = "rgb(0, 0, 0)";
-		c.stroke();
-
+		drawRightBorder();
 	}
 
 	// if bottom of Ball reaches the top of paddle,
