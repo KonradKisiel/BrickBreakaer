@@ -56,7 +56,6 @@ function updateCounters() {
 }
 
 function endGame() {
-	clearInterval(gameLoop);
 	c.fillStyle = "rgb(255, 128, 0)";
 	c.font = W / 9.6 + "px LCDPHONE";
 	c.fillText("GAME OVER", W * 0.2, H * 0.94);
@@ -65,7 +64,6 @@ function endGame() {
 }
 
 function winGame() {
-	clearInterval(gameLoop);
 	c.fillStyle = "rgb(255, 128, 0)";
 	c.font = W / 9.6 + "px LCDPHONE";
 	c.fillText("YOU WIN", W * 0.27, H * 0.94);

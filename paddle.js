@@ -1,3 +1,4 @@
+var rightPaddleMax = W - offset - PaddleW;
 function movePaddle() {
 	if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1)) {
 
@@ -22,13 +23,13 @@ function movePaddle() {
 		document.addEventListener("mousemove", function (e) {
 			if (document.getElementById("mouse").checked) {
 				var mouseX = e.clientX - (window.innerWidth / 2);
-				if (mouseX > 20 && mouseX < 430) {
+				if (mouseX > offset && mouseX < rightPaddleMax) {
 					PaddleX = mouseX;
-				} else if (mouseX <= 20) {
-					PaddleX = 20;
+				} else if (mouseX <= offset) {
+					PaddleX = offset;
 				}
-				else if (mouseX >= 430) {
-					PaddleX = 430;
+				else if (mouseX >= rightPaddleMax) {
+					PaddleX = rightPaddleMax;
 				}
 			}
 		}, false);

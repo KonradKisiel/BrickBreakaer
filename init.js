@@ -4,9 +4,6 @@ c.canvas.width = c.canvas.height / 1.6;
 var W = c.canvas.width;
 var H = c.canvas.height;
 
-var top_line = H / 19;
-var bot_line = H / 5.5;
-
 // audio sources
 var soundtrack = new Audio("golucky.mp3");
 var edge_s = new Audio("edges.wav");
@@ -18,20 +15,22 @@ var liveloss_s = new Audio("liveloss.wav");
 var nextLevel_s = new Audio("newLevel.wav");
 var win_s = new Audio("win.mp3");
 
-//******** Game initial setings *********	
+//********* Game initial setings **********	
 
 var gameLoop;
 var ballStartPsn = true;
 
 
-//************** Counters ****************	 
+//************** Counters *****************
 
 var score = 0;
 var lives = 7;
 var lvlCounter = 0;
 
-//************** Borders ****************	
+//************** Borders ******************
 
+var top_line = H / 19;
+var bot_line = H / 5.5;
 //line width
 var lineW = H / 400;
 //bottom screen vertical offset
@@ -41,7 +40,7 @@ var bordersX = offset;
 //horizontal borders width
 var bordersY = H / 80;
 
-// ************ Paddle settings ************
+//************ Paddle settings ************
 
 var PaddleMove;
 var PaddleW = H / 6;
@@ -54,7 +53,7 @@ var PaddleY = H - PaddleH - bot_line - bordersY;
 var PaddleDeltaX;
 var PaddleSpeedX = W / 37;
 
-//********Ball************
+//***************** Ball ******************
 
 var BallSpeed = W / 200;
 var BallX = W / 2;
@@ -63,13 +62,13 @@ var BallR = W / 48;
 var BallDeltaX;
 var BallDeltaY;
 
-//**********Levels******************
+//**************** Levels ******************
 
 var bricksRow = 18;
 var brickHeight = H / 50;
 var brickWidth = W / bricksRow;
 
-//************** Start Positions ***********/
+//************** Start Positions ***********
 
 BallDeltaY = 0;
 BallDeltaX = 0;

@@ -44,6 +44,6 @@ function update() {
 		setLvl();
 	}
 	updateCounters();
-	window.requestAnimationFrame(update);
+	requestAnimationFrame(update);
 }
-window.requestAnimationFrame(update);
+requestAnimationFrame(update);
