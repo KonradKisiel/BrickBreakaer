@@ -39,19 +39,19 @@ function moveBall() {
 	}
 	// If side of Ball touches either side of the wall then reverse X direction
 	//left of Ball moves too far left
-	if ((BallX + BallDeltaX - BallR - 18 <= 0) ||
+	if ((BallX + BallDeltaX - BallR<= 0) ||
 		//or right side of Ball moves too far right
-		(BallX + BallDeltaX + BallR + 18 >= W) || collisionXWithBricks()) {
+		(BallX + BallDeltaX + BallR >= W) || collisionXWithBricks()) {
 		BallDeltaX = -BallDeltaX;
 		play_sound(edge_s);
 	}
 	//left side bounce effect
-	if (BallX + BallDeltaX - BallR - per <= 10) {
+	if (BallX + BallDeltaX - BallR - bordersX <= 0) {
 		drawLeftBorder();
 	}
 
 	//right	side bounce effect
-	if (BallX + BallDeltaX + BallR + per >= W - 10) {
+	if (BallX + BallDeltaX + BallR + bordersX >= W) {
 		drawRightBorder();
 	}
 

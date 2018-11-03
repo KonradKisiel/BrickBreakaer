@@ -20,15 +20,16 @@ soundtrack.addEventListener('ended', function () {
 }, false);
 
 movePaddle();
-function update() {
 
+function update() {
+	c.strokeStyle = "rgb(0, 0, 0)";
 	drawBackground();
 	drawBottomScreen();
 
 	clearGameArea();
 
 	c.fillStyle = "rgb(75, 0, 130)";
-	c.strokeStyle = "rgb(0, 0, 0)";
+
 	drawTopBorder();
 
 	c.fillStyle = "rgb(148, 0, 255)";
