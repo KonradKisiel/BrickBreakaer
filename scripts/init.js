@@ -5,15 +5,15 @@ var W = c.canvas.width;
 var H = c.canvas.height;
 
 // audio sources
-var soundtrack = new Audio("golucky.mp3");
-var edge_s = new Audio("edges.wav");
-var edge_top_s = new Audio("edge_top.wav");
-var brick_s = new Audio("brick.wav");
-var paddle_s = new Audio("paddle.wav");
-var delbrick_s = new Audio("delbrick.wav");
-var liveloss_s = new Audio("liveloss.wav");
-var nextLevel_s = new Audio("newLevel.wav");
-var win_s = new Audio("win.mp3");
+var soundtrack = new Audio("audio/golucky.mp3");
+var edge_s = new Audio("audio/edges.wav");
+var edge_top_s = new Audio("audio/edge_top.wav");
+var brick_s = new Audio("audio/brick.wav");
+var paddle_s = new Audio("audio/paddle.wav");
+var delbrick_s = new Audio("audio/delbrick.wav");
+var liveloss_s = new Audio("audio/liveloss.wav");
+var nextLevel_s = new Audio("audio/newLevel.wav");
+var win_s = new Audio("audio/win.mp3");
 
 //********* Game initial setings **********	
 
