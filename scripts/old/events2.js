@@ -1,5 +1,3 @@
-var rightPaddleMax = W - offset - PaddleW;
-
 if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1)) {
 
     document.addEventListener("touchmove", function (e) {
@@ -79,18 +77,3 @@ document.addEventListener("click", function (e) {
         }
     }
 });
-
-function movePaddle() {
-
-	// If paddle reaches the ends of ball, then don't let it move 
-	if (BallDeltaY == 0) {
-		if (PaddleX + PaddleDeltaX < W / 2 - PaddleW || PaddleX + PaddleDeltaX + PaddleW > W / 2 + PaddleW) {
-			PaddleDeltaX = 0;
-		}
-	}
-	// If paddle reaches the ends, then don't let it move 
-	if (PaddleX + PaddleDeltaX < 0 || PaddleX + PaddleDeltaX + PaddleW > W) {
-		PaddleDeltaX = 0;
-	}
-	PaddleX = PaddleX + PaddleDeltaX;
-}

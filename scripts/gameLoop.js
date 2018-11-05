@@ -1,42 +1,25 @@
 
-/*
-function startGame() {
+var animLoop;
+//requestAnimationFrame fallbacks
+requestAnimationFrame = requestAnimationFrame
+	|| window.mozRequestAnimationFrame
+	|| window.webkitRequestAnimationFrame
+	|| window.msRequestAnimationFrame
+	|| function (f) { return setTimeout(f, 1000 / 60) }
 
-********************************************* CHECK IT ********************************************************************************
-	soundtrack.addEventListener('ended', function () {
-		this.currentTime = 0;
-		this.play();
-	}, false);
-
-
-	// call the update() function every 20ms until clearInterval(gameLoop) is called
-	gameLoop = setInterval(update, 20);
-}
-*/
+cancelAnimationFrame = cancelAnimationFrame
+	|| window.mozCancelAnimationFrame
+	|| function (animLoop) { clearTimeout(animLoop) }
 
 soundtrack.addEventListener('ended', function () {
 	this.currentTime = 0;
 	this.play();
 }, false);
 
-movePaddle();
-
-function update() {
-	c.strokeStyle = "rgb(0, 0, 0)";
-	drawBackground();
-	drawBottomScreen();
-
-	clearGameArea();
-
-	c.fillStyle = "rgb(75, 0, 130)";
-
-	drawTopBorder();
-
-	c.fillStyle = "rgb(148, 0, 255)";
-	drawBottomBorder();
-	drawRightBorder();
-	drawLeftBorder();
-
+function gameLoop() {
+	movePaddle();
+	drawGameBox();
+	updateGameLoop();
 	if (startBool) {
 		moveBall();
 		drawPaddle();
@@ -44,6 +27,35 @@ function update() {
 		setLvl();
 	}
 	updateCounters();
-	requestAnimationFrame(update);
 }
-requestAnimationFrame(update);
+gameLoop();
+
+
+
+function updateGameLoop() {
+	animLoop = requestAnimationFrame(gameLoop);
+}
+
+function stopGameLoop() {
+	cancelAnimationFrame(animLoop);
+}
+
+function endGame() {
+	c.fillStyle = "rgb(255, 128, 0)";
+	c.font = W / 9.6 + "px LCDPHONE";
+	c.fillText("GAME OVER", W * 0.2, H * 0.94);
+	// stop playing music
+	soundtrack.pause();
+	//stop gameLoop
+	animLoop = cancelAnimationFrame(animLoop);
+}
+
+function winGame() {
+	c.fillStyle = "rgb(255, 128, 0)";
+	c.font = W / 9.6 + "px LCDPHONE";
+	c.fillText("YOU WIN", W * 0.27, H * 0.94);
+	soundtrack.pause();
+	play_sound(win_s);
+	//stop gameLoop
+	animLoop = cancelAnimationFrame(animLoop);
+}

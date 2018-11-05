@@ -1,51 +1,3 @@
-.container {
-    position: fixed;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    font-family: LCDPHONE, monospace;
-    color: rgb(255, 128, 0);
-    font-size: 3vh;
-}
-
-body {
-    width: 100%;
-    background: #000000;
-}
-
-@font-face
-{
-    /*Freeware*/
-font-family: Pipe Dream;
-src: url('Pipe_Dream_by_TRIFORCE89.ttf');
-}
-@font-face
-{
-    /*Freeware*/
-font-family: LCDPHONE;
-src: url('LCDPHONE.ttf');
-}
-@font-face
-{
-    /*Free for commercial use*/
-font-family: ka1;
-src: url('ka1.ttf');
-}
-@font-face
-{
-    /* https://fontstruct.com/fontstructions/show/165061/smoothie_iii_for_game_maker_1 */
-    /* author: Abyss01 */
-font-family: Smoothie-III-For-Game-Maker;
-src: url('Smoothie-III-For-Game-Maker.ttf');
-}
-@font-face
-{
-    /* free */
-font-family: BMfigaro;
-src: url('BMfigaro.ttf');
-}
-
-
 /* ***************** MENU **********************/
 
 #menus {
@@ -89,11 +41,21 @@ p:hover {
     margin-top: 43%;
 }
 
-#bck_to_menu {
+#gameplay_menu{
     position: fixed;
-    top: 4%;
-    left: 6%;
+    top: 5%;
     display: none;
+    width: 100%;
+}
+
+#bck_to_menu {
+    left: 6%;
+    display: inline-block;
+}
+
+#pause{
+    right: 6%;
+    display: inline-block;
 }
 
 input[type="checkbox"],

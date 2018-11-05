@@ -1,3 +1,6 @@
+//black color for all strokes
+c.strokeStyle = "rgb(0, 0, 0)";
+
 function drawBackground() {
     c.fillStyle = "rgb(75, 0, 130)";
     c.fillRect(0, 0, W, H);
@@ -119,4 +122,16 @@ function drawLeftBorder() {
     c.lineWidth = lineW;
     c.stroke();
     c.closePath();
+}
+
+function drawGameBox(){
+	drawBackground();
+	drawBottomScreen();
+	clearGameArea();
+	c.fillStyle = "rgb(75, 0, 130)";
+	drawTopBorder();
+	c.fillStyle = "rgb(148, 0, 255)";
+	drawBottomBorder();
+	drawRightBorder();
+	drawLeftBorder();
 }

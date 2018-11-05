@@ -3,7 +3,55 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<title>arKanoid</title>
-	<link href="style/main.css" rel="stylesheet" type="text/css" />
+	<style>
+	/* fomts urls move to header due to mobile support */
+		.container {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    font-family: LCDPHONE, monospace;
+    color: rgb(255, 128, 0);
+    font-size: 3vh;
+	}
+	body {
+    	width: 100%;
+    	background: #000000;
+    	user-select: none !important;
+	}
+	@font-face
+	{
+    	/*Freeware*/
+	font-family: Pipe Dream;
+	src: url('Pipe_Dream_by_TRIFORCE89.ttf');
+	}
+	@font-face
+	{
+		/*Freeware*/
+	font-family: LCDPHONE;
+	src: url('LCDPHONE.ttf');
+	}
+	@font-face
+	{
+    	/*Free for commercial use*/
+	font-family: ka1;
+	src: url('ka1.ttf');
+	}
+	@font-face
+	{
+    	/* https://fontstruct.com/fontstructions/show/165061/smoothie_iii_for_game_maker_1 */
+    	/* author: Abyss01 */
+	font-family: Smoothie-III-For-Game-Maker;
+	src: url('Smoothie-III-For-Game-Maker.ttf');
+	}
+	@font-face
+	{
+    	/* free */
+	font-family: BMfigaro;
+	src: url('BMfigaro.ttf');
+	}
+	</style>
+	<link href="menu.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="container">
@@ -62,9 +110,9 @@
 					&lt BACK</p>
 			</form>
 		</div>
-		<div id="bck_to_menu">
-			<p onclick="bck_to_menu()">
-				&lt BACK</p>
+		<div id="gameplay_menu">
+			<p id="bck_to_menu" onclick="bck_to_menu()">BACK</p>
+			<p id="pause" onclick="pause()">PAUSE</p>
 		</div>
 	</div>
 	<script src="scripts/init.js"></script>

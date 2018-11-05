@@ -17,14 +17,12 @@ var win_s = new Audio("audio/win.mp3");
 
 //********* Game initial setings **********	
 
-var gameLoop;
 var ballStartPsn = true;
-
 
 //************** Counters *****************
 
 var score = 0;
-var lives = 7;
+var lives = 5;
 var lvlCounter = 0;
 
 //************** Borders ******************
@@ -61,6 +59,7 @@ var BallY = H - bot_line - W / 8;
 var BallR = W / 48;
 var BallDeltaX;
 var BallDeltaY;
+var ballStartPsn = true;
 
 //**************** Levels ******************
 
