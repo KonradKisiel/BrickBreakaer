@@ -1,12 +1,12 @@
 // set starting ball position
 function startBall() {
-	ballStartPsn = true;
 	BallDeltaY = 0;
 	BallDeltaX = 0;
 	PaddleDeltaX = 0;
 	BallX = W / 2 + PaddleDeltaX;
 	BallY = H - bot_line - W / 8;
 	PaddleX = W / 2 - PaddleW / 2;
+	ballStartPsn = true;
 }
 
 function moveBall() {

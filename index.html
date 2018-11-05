@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<!-- COPYRIGH KONRAD KISIEL -->
+	<meta charset="UTF-8">
 	<title>arKanoid</title>
+	<meta author="Konrad Kisiel">
 	<style>
-	/* fomts urls move to header due to mobile support */
-		.container {
+	/* fonts urls move to header due to mobile support */
+	.container {
     position: fixed;
     transform: translate(-50%, -50%);
     left: 50%;
@@ -14,44 +16,143 @@
     color: rgb(255, 128, 0);
     font-size: 3vh;
 	}
+
+	*{
+		user-select: none !important;
+	}
+
 	body {
     	width: 100%;
     	background: #000000;
-    	user-select: none !important;
 	}
-	@font-face
-	{
-    	/*Freeware*/
-	font-family: Pipe Dream;
-	src: url('Pipe_Dream_by_TRIFORCE89.ttf');
+
+	@font-face {
+		font-family: Pipe Dream;
+		src: url('Pipe_Dream_by_TRIFORCE89.ttf');
 	}
-	@font-face
-	{
-		/*Freeware*/
-	font-family: LCDPHONE;
-	src: url('LCDPHONE.ttf');
+
+	@font-face {
+		font-family: LCDPHONE;
+		src: url('LCDPHONE.ttf');
 	}
-	@font-face
-	{
-    	/*Free for commercial use*/
-	font-family: ka1;
-	src: url('ka1.ttf');
+
+	@font-face {
+		font-family: ka1;
+		src: url('ka1.ttf');
 	}
-	@font-face
-	{
-    	/* https://fontstruct.com/fontstructions/show/165061/smoothie_iii_for_game_maker_1 */
-    	/* author: Abyss01 */
-	font-family: Smoothie-III-For-Game-Maker;
-	src: url('Smoothie-III-For-Game-Maker.ttf');
+
+	@font-face {
+		font-family: BMfigaro;
+		src: url('BMfigaro.ttf');
 	}
-	@font-face
-	{
-    	/* free */
-	font-family: BMfigaro;
-	src: url('BMfigaro.ttf');
+	/* ***************** MENU **********************/
+
+	#menus {
+    	position: fixed;
+    	transform: translateX(-50%);
+    	top: 4%;
+    	left: 50%;
+    	text-align: center;
 	}
-	</style>
-	<link href="menu.css" rel="stylesheet" type="text/css" />
+
+h1 {
+    font-size: 7vh;
+}
+
+h2 {
+    font-size: 3.3vh;
+    border-bottom: 4px dashed rgb(255, 128, 0);
+    text-align: center;
+}
+
+input:hover,
+p:hover {
+    cursor: pointer;
+}
+
+#main-menu {
+    font-size: 5vh;
+    margin-top: 50%;
+}
+
+.options {
+    display: none;
+    text-align: left;
+}
+
+#controlls {
+    margin-top: 15%;
+}
+
+#sound-options {
+    margin-top: 43%;
+}
+
+#gameplay_menu{
+    position: fixed;
+    top: 5%;
+    display: none;
+    width: 100%;
+}
+
+#bck_to_menu {
+    margin-left: 5%;
+    float:left;
+}
+
+#pause{
+    margin-right: 5%;
+    float:right;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked+label,
+input[type="radio"]:checked+label {
+    color: rgb(255, 128, 0);
+}
+
+input[type="checkbox"]+label span,
+input[type="radio"]+label span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 2vh;
+    height: 2vh;
+    background: none;
+    border-radius: 0.5vh;
+    border: 0.2vh solid rgb(255, 128, 0);
+}
+
+input[type="radio"]+label span {
+    border-radius: 100%;
+}
+
+input[type="checkbox"]+label span::before {
+    content: "";
+    display: block;
+}
+
+input[type="checkbox"]:checked+label span::before {
+    background-color: rgb(255, 128, 0);
+    width: 2vh;
+    height: 2vh;
+    border-radius: 0.3vh;
+}
+
+input[type="radio"]:checked+label span {
+    background-color: rgb(255, 128, 0);
+    width: 2vh;
+    height: 2vh;
+    border: 0.2vh solid rgb(255, 128, 0);
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -117,7 +218,7 @@
 	</div>
 	<script src="scripts/init.js"></script>
 	<script src="scripts/menu.js"></script>
-	<script src="scripts/paddle.js"></script>
+	<script src="scripts/paddle2.js"></script>
 	<script src="scripts/ball.js"></script>
 	<script src="scripts/bricks.js"></script>
 	<script src="scripts/levels.js"></script>

@@ -54,12 +54,7 @@ function updateCounters() {
 	}
 	c.restore();
 }
-
 /*
-function updateGameLoop() {
-	animLoop = requestAnimationFrame(gameLoop);
-}
-
 function stopGameLoop() {
 	cancelAnimationFrame(animLoop);
 }

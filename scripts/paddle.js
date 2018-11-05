@@ -6,18 +6,13 @@ if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1
         if (document.getElementById("touch").checked) {
             PaddleX = event.targetTouches[0].clientX;
         }
-        else {  // ??? maybe not necessary
-            e.preventDefault();
-        }
     }, false);
 
     window.addEventListener('deviceorientation', function (e) {
         if (document.getElementById("gyro").checked) {
             PaddleDeltaX = event.gamma * 4;
-        } else {  // ??? maybe not necessary
-            e.preventDefault();
         }
-    });
+    }, false);
 }
 else {
     document.addEventListener("mousemove", function (e) {
@@ -41,44 +36,38 @@ else {
                 PaddleDeltaX = PaddleSpeedX;
             } else if (e.keyCode == 37) {
                 PaddleDeltaX = -PaddleSpeedX;
-            }
-        } else {  // ??? maybe not necessary
-            e.preventDefault();
-        }
-    });
+			}
+		}
+	}, false);
 
     document.addEventListener('keyup', function (e) {
         if (document.getElementById("keybord").checked) {
             if (e.keyCode == 39 || e.keyCode == 37) {
                 PaddleDeltaX = 0;
             }
-        } else {  // ??? maybe not necessary
-            e.preventDefault();
         }
-    });
+    }, false);
 
     document.addEventListener('keyup', function (e) {
         if (document.getElementById("keybord").checked) {
             if (e.keyCode == 32 && ballStartPsn) {
+				ballStartPsn = false;
                 BallDeltaY = 4;
                 BallDeltaX = 0;
-                ballStartPsn = false;
             }
-        } else {  // ??? maybe not necessary
-            e.preventDefault();
         }
-    });
+    }, false);
 
 }
 document.addEventListener("click", function (e) {
     if (!document.getElementById("keybord").checked) {
         if (ballStartPsn) {
+			ballStartPsn = false;
             BallDeltaY = 4;
             BallDeltaX = 0;
-            ballStartPsn = false;
         }
     }
-});
+}, false);
 
 function movePaddle() {
 
