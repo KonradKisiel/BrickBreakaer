@@ -4,7 +4,7 @@ function startBall() {
 	BallDeltaX = 0;
 	PaddleDeltaX = 0;
 	BallX = W / 2 + PaddleDeltaX;
-	BallY = H - bot_line - W / 8;
+	BallY = H - bottomInfoArea - W / 8;
 	PaddleX = W / 2 - PaddleW / 2;
 	ballStartPsn = true;
 }
@@ -15,17 +15,17 @@ function moveBall() {
 	c.fillStyle = "rgb(0, 192, 192)";
 	c.strokeStyle = "rgb(0, 0, 0)";
 
-	if (BallY + BallDeltaY - BallR < top_line || collisionYWithBricks()) {
+	if (BallY + BallDeltaY - BallR < topCounterArea || collisionYWithBricks()) {
 		BallDeltaY = -BallDeltaY;
 		play_sound(brick_s);
 	}
 
 	// top bouncing effect
-	if (BallY + BallDeltaY - BallR < top_line + 12) {
+	if (BallY + BallDeltaY - BallR < topCounterArea + 12) {
 		drawTopBorder();
 	}
 	// If the bottom of the Ball touches the bottom of the screen then end the game
-	if (BallY + BallDeltaY + BallR > H - bot_line - 14) {
+	if (BallY + BallDeltaY + BallR > H - bottomInfoArea - 14) {
 		if (lives > 0) {
 			lives--;
 			drawBottomBorder();
@@ -46,13 +46,15 @@ function moveBall() {
 		play_sound(edge_s);
 	}
 	//left side bounce effect
-	if (BallX + BallDeltaX - BallR - bordersX <= 0) {
+	if (BallX + BallDeltaX - BallR - bordersOffset <= 0) {
 		drawLeftBorder();
+		play_sound(edge_s);
 	}
 
 	//right	side bounce effect
-	if (BallX + BallDeltaX + BallR + bordersX >= W) {
+	if (BallX + BallDeltaX + BallR + bordersOffset >= W) {
 		drawRightBorder();
+		play_sound(edge_s);
 	}
 
 	// if bottom of Ball reaches the top of paddle,

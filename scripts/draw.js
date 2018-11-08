@@ -10,13 +10,13 @@ function drawBackground() {
 
 function drawBottomScreen() {
     c.fillStyle = "rgb(10, 10, 10)";
-    c.fillRect(offset, H * 0.84, W * 0.95, H * 0.14);
-    c.strokeRect(offset, H * 0.84, W * 0.95, H * 0.14);
+    c.fillRect(bordersOffset, H * 0.84, W-2*bordersOffset, H * 0.14);
+    c.strokeRect(bordersOffset, H * 0.84, W-2*bordersOffset, H * 0.14);
 }
 
 function clearGameArea() {
     c.fillStyle = "rgb(196, 196, 255)";
-    c.fillRect(bordersX, top_line + bordersY, W - 2 * bordersX, H - (top_line + bordersY + bot_line));
+    c.fillRect(bordersOffset, topCounterArea + bordersOffset, W - 2 * bordersOffset, H - (topCounterArea + bordersOffset + bottomInfoArea));
 }
 
 function drawBall() {
@@ -58,7 +58,7 @@ function drawSingleBrick(x, y, brickType) {
                 break;
         }
         c.strokeRect(x * brickWidth, y * brickHeight, brickWidth, brickHeight);
-        c.fillRect(x * brickWidth + 2, y * brickHeight + 2, brickWidth - 4, brickHeight - 4);
+        c.fillRect(x * brickWidth, y * brickHeight, brickWidth, brickHeight);
     }
 }
 // iterate through the bricksArray array and draw each brick using drawSingleBrick()
@@ -74,11 +74,11 @@ function drawBricks(bricksArray) {
 
 function drawTopBorder() {
     c.beginPath();
-    c.moveTo(0, top_line);
-    c.lineTo(W, top_line);
-    c.lineTo(W - bordersX, top_line + bordersY);
-    c.lineTo(bordersX, top_line + bordersY);
-    c.lineTo(0, top_line);
+    c.moveTo(0, topCounterArea);
+    c.lineTo(W, topCounterArea);
+    c.lineTo(W - bordersOffset, topCounterArea + bordersOffset);
+    c.lineTo(bordersOffset, topCounterArea + bordersOffset);
+    c.lineTo(0, topCounterArea);
     c.fill();
     c.stroke();
     c.closePath();
@@ -86,10 +86,10 @@ function drawTopBorder() {
 
 function drawBottomBorder() {
     c.beginPath();
-    c.moveTo(0, H - bot_line);
-    c.lineTo(W, H - bot_line);
-    c.lineTo(W - bordersX, H - bot_line - bordersY);
-    c.lineTo(bordersX, H - bot_line - bordersY);
+    c.moveTo(0, H - bottomInfoArea);
+    c.lineTo(W, H - bottomInfoArea);
+    c.lineTo(W - bordersOffset, H - bottomInfoArea - bordersOffset);
+    c.lineTo(bordersOffset, H - bottomInfoArea - bordersOffset);
     c.fill();
     c.stroke();
     c.closePath();
@@ -97,11 +97,11 @@ function drawBottomBorder() {
 
 function drawRightBorder() {
     c.beginPath();
-    c.moveTo(W , top_line);
-    c.lineTo(W, H - bot_line);
-    c.lineTo(W - bordersX, H - bot_line - bordersY);
-    c.lineTo(W - bordersX, top_line + bordersY);
-    c.lineTo(W, top_line);
+    c.moveTo(W , topCounterArea);
+    c.lineTo(W, H - bottomInfoArea);
+    c.lineTo(W - bordersOffset, H - bottomInfoArea - bordersOffset);
+    c.lineTo(W - bordersOffset, topCounterArea + bordersOffset);
+    c.lineTo(W, topCounterArea);
     c.fill();
     c.stroke();
     c.closePath();
@@ -109,11 +109,11 @@ function drawRightBorder() {
 
 function drawLeftBorder() {
     c.beginPath();
-    c.moveTo(0, top_line);
-    c.lineTo(0, H - bot_line);
-    c.lineTo(bordersX, H - bot_line - bordersY);
-    c.lineTo(bordersX, top_line + bordersY);
-    c.lineTo(0, top_line);
+    c.moveTo(0, topCounterArea);
+    c.lineTo(0, H - bottomInfoArea);
+    c.lineTo(bordersOffset, H - bottomInfoArea - bordersOffset);
+    c.lineTo(bordersOffset, topCounterArea + bordersOffset);
+    c.lineTo(0, topCounterArea);
     c.fill();
     c.stroke();
     c.closePath();

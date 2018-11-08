@@ -1,6 +1,13 @@
 var c = canvas.getContext('2d');
 c.canvas.height = window.innerHeight;
-c.canvas.width = c.canvas.height / 1.6;
+
+//adjust width to divice, max width = height
+if(window.innerHeight / window.innerWidth > 1){
+    c.canvas.width = window.innerWidth;
+}else{
+    c.canvas.width = c.canvas.height;
+}
+
 var W = c.canvas.width;
 var H = c.canvas.height;
 
@@ -25,14 +32,10 @@ var lvlCounter = 0;
 
 //************** Borders ******************
 
-var top_line = H / 19;
-var bot_line = H / 5.5;
-//bottom screen vertical offset
-var offset = W / 40;
-//vertical borders width
-var bordersX = offset;
-//horizontal borders width
-var bordersY = H / 80;
+var topCounterArea = H / 19;
+var bottomInfoArea = H / 5.5;
+//borders offset from edges of the screen
+var bordersOffset = H / 70;
 
 //************ Paddle settings ************
 
@@ -42,21 +45,21 @@ var PaddleH = H / 47;
 var PaddleDeltaX = 0;
 var PaddleDeltaY = 0;
 var PaddleX = W / 2 - PaddleW / 2;
-var PaddleY = H - PaddleH - bot_line - bordersY;
+var PaddleY = H - PaddleH - bottomInfoArea - bordersOffset;
 
 var PaddleDeltaX;
-var PaddleSpeedX = W / 37;
+var PaddleSpeedX = H / 60;
 
 //***************** Ball ******************
 
-var BallSpeed = W / 200;
+var BallSpeed = H / 350;
 var BallX = W / 2;
-var BallY = H - bot_line - W / 8;
-var BallR = W / 48;
+var BallY = H - bottomInfoArea - W / 8;
+var BallR = H / 80;
 
 //**************** Levels ******************
 
 var bricksRow = 18;
-var brickHeight = H / 50;
+var brickHeight = PaddleH;
 var brickWidth = W / bricksRow;
 

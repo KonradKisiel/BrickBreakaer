@@ -40,6 +40,8 @@ function bck_to_menu() {
 
 function pause(){
 	startBool = false;
+	document.getElementById("menu-heading").innerText = "PAUSE";
+	document.getElementById("play-continue").innerText = "CONTINUE";
 	document.getElementById("menus").style = "display: block";
 	document.getElementById("sound-options").style = "display: none !important";
 	document.getElementById("controlls").style = "display: none !important";
