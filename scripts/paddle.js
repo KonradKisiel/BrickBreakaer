@@ -1,10 +1,11 @@
-var rightPaddleMax = W - offset - PaddleW;
+var rightPaddleMax;
+var mouseX;
 
 if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1)) {
 
     document.addEventListener("touchmove", function (e) {
         if (document.getElementById("touch").checked) {
-            PaddleX = event.targetTouches[0].clientX;
+            PaddleX = event.targetTouches[0].clientX - PaddleW / 2;
         }
     }, false);
 
@@ -17,7 +18,8 @@ if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1
 else {
     document.addEventListener("mousemove", function (e) {
         if (document.getElementById("mouse").checked) {
-            var mouseX = e.clientX - (window.innerWidth / 2);
+            rightPaddleMax = W - offset - PaddleW;
+            mouseX = e.clientX - (window.innerWidth / 2 - W / 2 + PaddleW / 2);
             if (mouseX > offset && mouseX < rightPaddleMax) {
                 PaddleX = mouseX;
             } else if (mouseX <= offset) {
@@ -36,9 +38,9 @@ else {
                 PaddleDeltaX = PaddleSpeedX;
             } else if (e.keyCode == 37) {
                 PaddleDeltaX = -PaddleSpeedX;
-			}
-		}
-	}, false);
+            }
+        }
+    }, false);
 
     document.addEventListener('keyup', function (e) {
         if (document.getElementById("keybord").checked) {
@@ -51,7 +53,7 @@ else {
     document.addEventListener('keyup', function (e) {
         if (document.getElementById("keybord").checked) {
             if (e.keyCode == 32 && ballStartPsn) {
-				ballStartPsn = false;
+                ballStartPsn = false;
                 BallDeltaY = 4;
                 BallDeltaX = 0;
             }
@@ -61,25 +63,25 @@ else {
 }
 document.addEventListener("click", function (e) {
     if (!document.getElementById("keybord").checked) {
-        if (ballStartPsn) {
-			ballStartPsn = false;
+        if (ballStartPsn && startBool) {
             BallDeltaY = 4;
             BallDeltaX = 0;
+            ballStartPsn = false;
         }
     }
 }, false);
 
 function movePaddle() {
 
-	// If paddle reaches the ends of ball, then don't let it move 
-	if (BallDeltaY == 0) {
-		if (PaddleX + PaddleDeltaX < W / 2 - PaddleW || PaddleX + PaddleDeltaX + PaddleW > W / 2 + PaddleW) {
-			PaddleDeltaX = 0;
-		}
-	}
-	// If paddle reaches the ends, then don't let it move 
-	if (PaddleX + PaddleDeltaX < 0 || PaddleX + PaddleDeltaX + PaddleW > W) {
-		PaddleDeltaX = 0;
-	}
-	PaddleX = PaddleX + PaddleDeltaX;
+    // If paddle reaches the ends of ball, then don't let it move 
+    if (BallDeltaY == 0) {
+        if (PaddleX + PaddleDeltaX < W / 2 - PaddleW || PaddleX + PaddleDeltaX + PaddleW > W / 2 + PaddleW) {
+            PaddleDeltaX = 0;
+        }
+    }
+    // If paddle reaches the ends, then don't let it move 
+    if (PaddleDeltaX + PaddleX < offset || PaddleDeltaX + PaddleX + PaddleW > W-offset) {
+        PaddleDeltaX = 0;
+    }
+    PaddleX = PaddleX + PaddleDeltaX;
 }

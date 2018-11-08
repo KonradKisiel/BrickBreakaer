@@ -19,13 +19,12 @@ function setLvl(){
 			bricksArray = lvls[lvlCounter];
 			PaddleW = H / 6 - PaddleW / 9;
 			BallSpeed = BallSpeed + PaddleW / 1000;
-			play_sound(nextLevel_s);
+			play_sound(brick_s);
 		}
 	}
 }
 
 function updateCounters() {
-	c.save();
 	c.stroke();
 	c.beginPath();
 	c.fillStyle = "rgb(10, 10, 10)";
@@ -33,9 +32,8 @@ function updateCounters() {
 	c.fillRect(W * 0.83, H / 160, W * 0.13, H / 27);
 
 	// Set the text font and color 
-	c.font = W / 13 + "px Pipe Dream";
+	c.font = W / 13 + "px PipeDream";
 	c.fillStyle = "rgb(0, 102, 204)";
-	c.strokeStyle = "rgb(0, 0, 0)";
 	c.fillText("Score: ", W / 30, H / 24);
 	c.fillText("Lives: ", W * 0.62, H / 24);
 	c.lineWidth = 1;
@@ -47,12 +45,11 @@ function updateCounters() {
 	c.fillText(+lives, W / 1.19, H / 25);
 
 	// start conditions
-	if (score == 0) {
+	if (ballStartPsn && startBool) {
 		c.font = W / 9.6 + "px LCDPHONE";
 		c.fillStyle = "rgb(255, 128, 0)";
 		c.fillText("TAP TO START", W / 10, H * 0.94);
 	}
-	c.restore();
 }
 /*
 function stopGameLoop() {
@@ -65,6 +62,7 @@ function endGame() {
 	c.fillText("GAME OVER", W * 0.2, H * 0.94);
 	// stop playing music
 	soundtrack.pause();
+	play_sound(gameOver_s);
 	//stop gameLoop
 	animLoop = cancelAnimationFrame(animLoop);
 }

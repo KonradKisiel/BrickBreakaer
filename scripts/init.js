@@ -13,8 +13,9 @@ var brick_s = new Audio("audio/brick.wav");
 var paddle_s = new Audio("audio/paddle.wav");
 var delbrick_s = new Audio("audio/delbrick.wav");
 var liveloss_s = new Audio("audio/liveloss.wav");
-var nextLevel_s = new Audio("audio/newLevel.wav");
+//var nextLevel_s = new Audio("audio/newLevel.wav");
 var win_s = new Audio("audio/win.mp3");
+var gameOver_s = new Audio("audio/gameOver.wav");
 
 //************** Counters *****************
 
@@ -26,8 +27,6 @@ var lvlCounter = 0;
 
 var top_line = H / 19;
 var bot_line = H / 5.5;
-//line width
-var lineW = H / 400;
 //bottom screen vertical offset
 var offset = W / 40;
 //vertical borders width

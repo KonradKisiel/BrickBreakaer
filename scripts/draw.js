@@ -1,5 +1,7 @@
 //black color for all strokes
 c.strokeStyle = "rgb(0, 0, 0)";
+//line width
+c.lineWidth = H / 600;
 
 function drawBackground() {
     c.fillStyle = "rgb(75, 0, 130)";
@@ -9,7 +11,6 @@ function drawBackground() {
 function drawBottomScreen() {
     c.fillStyle = "rgb(10, 10, 10)";
     c.fillRect(offset, H * 0.84, W * 0.95, H * 0.14);
-    c.lineWidth = 4;
     c.strokeRect(offset, H * 0.84, W * 0.95, H * 0.14);
 }
 
@@ -23,7 +24,6 @@ function drawBall() {
     c.arc(BallX, BallY, BallR, 0, Math.PI * 2);
     c.fillStyle = "rgb(0,68,255)";
     c.fill();
-    c.lineWidth = 2;
     c.stroke();
     c.closePath();
 }
@@ -31,7 +31,6 @@ function drawBall() {
 function drawPaddle() {
     c.fillStyle = "rgb(0,68,255)";
     c.fillRect(PaddleX, PaddleY, PaddleW, PaddleH);
-    c.lineWidth = 2;
     c.strokeRect(PaddleX, PaddleY, PaddleW, PaddleH);
 }
 
@@ -81,7 +80,6 @@ function drawTopBorder() {
     c.lineTo(bordersX, top_line + bordersY);
     c.lineTo(0, top_line);
     c.fill();
-    c.lineWidth = lineW;
     c.stroke();
     c.closePath();
 }
@@ -93,7 +91,6 @@ function drawBottomBorder() {
     c.lineTo(W - bordersX, H - bot_line - bordersY);
     c.lineTo(bordersX, H - bot_line - bordersY);
     c.fill();
-    c.lineWidth = lineW;
     c.stroke();
     c.closePath();
 }
@@ -106,7 +103,6 @@ function drawRightBorder() {
     c.lineTo(W - bordersX, top_line + bordersY);
     c.lineTo(W, top_line);
     c.fill();
-    c.lineWidth = lineW;
     c.stroke();
     c.closePath();
 }
@@ -119,7 +115,6 @@ function drawLeftBorder() {
     c.lineTo(bordersX, top_line + bordersY);
     c.lineTo(0, top_line);
     c.fill();
-    c.lineWidth = lineW;
     c.stroke();
     c.closePath();
 }
