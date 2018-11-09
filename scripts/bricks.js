@@ -1,3 +1,41 @@
+/* ************************** BRICKS **************************** */
+
+var bricksRow = 18;
+var brickHeight = PaddleH;
+var brickWidth = W / bricksRow;
+
+// draw a single brick
+function drawSingleBrick(x, y, brickType) {
+    if (brickType) {
+        switch (brickType) { // if brick is still visible; three colours for three types of bricks
+            case 1:
+                c.fillStyle = "rgba(64,172,0,0.8)";
+                break;
+            case 2:
+                c.fillStyle = "rgba(0,176,148,0.8)";
+                break;
+            case 3:
+                c.fillStyle = "rgba(255,128,0,0.8)";
+                break;
+            case 4:
+                c.fillStyle = "rgba(196,32,0,0.8)";
+                break;
+        }
+        c.strokeRect(x * brickWidth, y * brickHeight, brickWidth, brickHeight);
+        c.fillRect(x * brickWidth, y * brickHeight, brickWidth, brickHeight);
+    }
+}
+// iterate through the bricksArray array and draw each brick using drawSingleBrick()
+function drawBricks(bricksArray) {
+    for (var i = 0; i < bricksArray.length; i++) {
+        for (var j = 0; j < bricksArray[i].length; j++) {
+            drawSingleBrick(j, i, bricksArray[i][j]);
+        }
+    }
+}
+
+//************* Handle Collisions **************/
+
 function collisionXWithBricks() {
 	var bumpedX = false;
 	for (var i = 0; i < bricksArray.length; i++) {

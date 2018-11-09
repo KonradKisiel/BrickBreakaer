@@ -1,3 +1,22 @@
+//***************** Ball Settings ******************
+//speed
+var BallSpeed = H / 350;
+//vertical start psn
+var BallX = W / 2;
+//horizontal start psn
+var BallY = H - bottomInfoArea - W / 8;
+//ball radius
+var BallR = H / 80;
+
+function drawBall() {
+    c.beginPath();
+    c.arc(BallX, BallY, BallR, 0, Math.PI * 2);
+    c.fillStyle = "rgb(0,68,255)";
+    c.fill();
+    c.stroke();
+    c.closePath();
+}
+
 // set starting ball position
 function startBall() {
 	BallDeltaY = 0;
@@ -9,6 +28,14 @@ function startBall() {
 	ballStartPsn = true;
 }
 
+//add movent to a ball
+function releaseBall(){
+    BallDeltaY = 4;
+    BallDeltaX = 0;
+    ballStartPsn = false;
+}
+
+//handle ball actions
 function moveBall() {
 	c.save();
 	//set highlighted borders color
@@ -72,5 +99,4 @@ function moveBall() {
 	// Move the Ball
 	BallX = BallX + BallDeltaX * BallSpeed;
 	BallY = BallY + BallDeltaY * BallSpeed;
-
 }

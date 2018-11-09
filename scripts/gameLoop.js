@@ -20,7 +20,6 @@ function updateGameLoop() {
 	animLoop = requestAnimationFrame(gameLoop);
 }
 
-
 startBall();
 function gameLoop() {
 	movePaddle();

@@ -1,1 +1,4 @@
 https://www.fonts4free.net/lcd-phone-font.html
+
+use fontsquirrel to generate more formats:
+https://www.fontsquirrel.com/tools/webfont-generator

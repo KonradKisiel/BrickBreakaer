@@ -1,1 +1,4 @@
 https://www.fontspace.com/triforce89/pipe-dream
+
+use fontsquirrel to generate more formats:
+https://www.fontsquirrel.com/tools/webfont-generator
