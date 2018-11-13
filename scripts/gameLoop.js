@@ -25,12 +25,12 @@ function gameLoop() {
 	movePaddle();
 	drawGameBox();
 	updateGameLoop();
-	if (startBool) {
+//	if (startBool) {
 		moveBall();
 		drawPaddle();
 		drawBall();
 		setLvl();
-	}
+//	}
 	updateCounters();
 }
 gameLoop();

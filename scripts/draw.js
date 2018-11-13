@@ -57,6 +57,12 @@ function drawLeftBorder() {
     c.closePath();
 }
 
+function drawBottomScreen() {
+    c.fillStyle = "rgb(10, 10, 10)";
+    c.fillRect(bordersOffset, H * 0.84, W-2*bordersOffset, H * 0.14);
+    c.strokeRect(bordersOffset, H * 0.84, W-2*bordersOffset, H * 0.14);
+}
+
 function drawGameBox(){
 	drawBackground();
 	drawBottomScreen();
@@ -66,5 +72,5 @@ function drawGameBox(){
 	c.fillStyle = "rgb(148, 0, 255)";
 	drawBottomBorder();
 	drawRightBorder();
-	drawLeftBorder();
+    drawLeftBorder();
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- COPYRIGH KONRAD KISIEL -->
+	<meta charset="UTF-8">
+	<title>arKanoid</title>
+	<meta author="Konrad Kisiel">
+	<meta name="viewport" content="user-scalable=no"/>
+	<link href="style/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		<canvas id="canvas">Your browser does not support the HTML5 Canvas. Please update your browser.</canvas>
+		<div id="menus">
+			<h1 id="menu-heading">PAUSE</h1>
+			<form id="sound-options" class="options">
+				<h2>Sound Options</h2>
+				<br>
+				<input type="checkbox" checked="checked" name="music" id="music">
+				<label for="music">
+					<span></span> Music</label>
+				<br>
+				<br>
+				<input type="checkbox" checked="checked" name="sound" id="sound">
+				<label for="sound">
+					<span></span> Sound FX</label>
+				<br>
+				<br>
+				<p onclick="options()">
+					&lt RESUME</p>
+			</form>
+		</div>
+		<div id="gameplay_menu">
+			<a id="bck_to_menu" onclick="bck_to_menu()" href="index.html">BACK</a>
+            <p id="options" onclick="options()">OPTIONS</p>
+			<p id="pause" onclick="pause()">PAUSE</p>
+		</div>
+	</div>
+	<script src="scripts/init.js"></script>
+	<script src="scripts/gameMenu.js"></script>
+	<script src="scripts/counters.js"></script>
+	<script src="scripts/paddle.js"></script>
+	<script src="scripts/ball.js"></script>
+	<script src="scripts/bricks.js"></script>
+	<script src="scripts/levels.js"></script>
+	<script src="scripts/gameStates.js"></script>
+	<script src="scripts/draw.js"></script>
+	<script src="scripts/gameLoop.js"></script>
+</body>
+</html>

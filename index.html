@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>arKanoid</title>
 	<meta author="Konrad Kisiel">
+	<meta name="viewport" content="user-scalable=no"/>
 	<link href="style/stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -15,14 +16,14 @@
 		<div id="menus">
 			<h1 id="menu-heading">arKanoid</h1>
 			<div id="main-menu">
-				<p id="play-continue" onclick="start_game()">Play</p>
+				<a id="play-continue" href="gameplay.html" onclick="start_game()">Play</a>
 				<p onclick="controls()">Controls</p>
 				<p onclick="sound()">Sound</p>
 			</div>
 			<div id="controlls" class="options">
 				<form>
 					<h2>Mobile:</h2>
-					<input type="radio" name="controls" checked="checked" id="touch">
+					<input type="radio" name="controls" id="touch">
 					<label for="touch">
 						<span></span> Touch</label>
 					<br>
@@ -34,13 +35,13 @@
 				</form>
 				<form>
 					<h2>Desktop:</h2>
-					<input type="radio" name="controls" checked="checked" id="mouse">
+					<input type="radio" name="controls" id="mouse">
 					<label for="mouse">
 						<span></span> Mouse</label>
 					<br>
 					<br>
-					<input type="radio" name="controls" id="keybord">
-					<label for="keybord">
+					<input type="radio" name="controls" id="keyboard">
+					<label for="keyboard">
 						<span></span> Keybord</label>(arrows & space)
 					<br>
 				</form>
@@ -50,12 +51,12 @@
 			<form id="sound-options" class="options">
 				<h2>Sound Options</h2>
 				<br>
-				<input type="checkbox" checked="checked" name="music" id="music">
+				<input type="checkbox" name="music" id="music">
 				<label for="music">
 					<span></span> Music</label>
 				<br>
 				<br>
-				<input type="checkbox" checked="checked" name="sound" id="sound">
+				<input type="checkbox" name="sound" id="sound">
 				<label for="sound">
 					<span></span> Sound FX</label>
 				<br>
@@ -64,20 +65,10 @@
 					&lt BACK</p>
 			</form>
 		</div>
-		<div id="gameplay_menu">
-			<p id="bck_to_menu" onclick="bck_to_menu()">BACK</p>
-			<p id="pause" onclick="pause()">PAUSE</p>
-		</div>
 	</div>
 	<script src="scripts/init.js"></script>
-	<script src="scripts/menu.js"></script>
 	<script src="scripts/counters.js"></script>
-	<script src="scripts/paddle.js"></script>
-	<script src="scripts/ball.js"></script>
-	<script src="scripts/bricks.js"></script>
-	<script src="scripts/levels.js"></script>
-	<script src="scripts/gameStates.js"></script>
 	<script src="scripts/draw.js"></script>
-	<script src="scripts/gameLoop.js"></script>
+	<script src="scripts/menu.js"></script>
 </body>
 </html>

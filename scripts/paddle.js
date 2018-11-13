@@ -22,11 +22,17 @@ function drawPaddle() {
     c.strokeRect(PaddleX, PaddleY, PaddleW, PaddleH);
 }
 
+//geeting controls settings from localStorage
+var touch = JSON.parse(localStorage.getItem('touchBool'));
+var gyro = JSON.parse(localStorage.getItem('gyroBool'));
+var mouse = JSON.parse(localStorage.getItem('mouseBool'));
+var keyboard = JSON.parse(localStorage.getItem('keyboardBool'));
+
 //handle events
 if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1)) {
 
     document.addEventListener("touchmove", function (e) {
-        if (document.getElementById("touch").checked) {
+        if (touch) {
             rightPaddleMax = W - bordersOffset - PaddleW;
             touchX = event.targetTouches[0].clientX - PaddleW / 2;
             limitPaddleMove(touchX, rightPaddleMax);
@@ -34,14 +40,14 @@ if (window.DeviceOrientationEvent && (window.innerHeight / window.innerWidth > 1
     }, false);
 
     window.addEventListener('deviceorientation', function (e) {
-        if (document.getElementById("gyro").checked) {
+        if (gyro) {
             PaddleDeltaX = event.gamma * 3;
         }
     }, false);
 }
 else {
     document.addEventListener("mousemove", function (e) {
-        if (document.getElementById("mouse").checked) {
+        if (mouse) {
             rightPaddleMax = W - bordersOffset - PaddleW;
             mouseX = e.clientX - (window.innerWidth / 2 - W / 2 + PaddleW / 2);
             limitPaddleMove(mouseX, rightPaddleMax);
@@ -50,7 +56,7 @@ else {
 
     // Start Tracking Keystokes
     document.addEventListener('keydown', function (e) {
-        if (document.getElementById("keybord").checked) {
+        if (keyboard) {
             if (e.keyCode == 39) {
                 PaddleDeltaX = PaddleSpeedX;
             } else if (e.keyCode == 37) {
@@ -60,7 +66,7 @@ else {
     }, false);
 
     document.addEventListener('keyup', function (e) {
-        if (document.getElementById("keybord").checked) {
+        if (keyboard) {
             if (e.keyCode == 39 || e.keyCode == 37) {
                 PaddleDeltaX = 0;
             }
@@ -68,9 +74,8 @@ else {
     }, false);
 
     document.addEventListener('keyup', function (e) {
-        if (document.getElementById("keybord").checked) {
+        if (keyboard) {
             if (e.keyCode == 32 && ballStartPsn) {
-                //setTimeout(releaseBall, 500);
                 releaseBall();
             }
         }
@@ -78,9 +83,8 @@ else {
 
 }
 document.addEventListener("click", function (e) {
-    if (!document.getElementById("keybord").checked) {
+    if (!keyboard) {
         if (ballStartPsn) {
-            //setTimeout(releaseBall, 500);
             releaseBall();
         }
     }
