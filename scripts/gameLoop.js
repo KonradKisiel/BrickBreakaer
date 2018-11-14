@@ -22,15 +22,13 @@ function updateGameLoop() {
 
 startBall();
 function gameLoop() {
+	updateGameLoop();
 	movePaddle();
 	drawGameBox();
-	updateGameLoop();
-//	if (startBool) {
-		moveBall();
-		drawPaddle();
-		drawBall();
-		setLvl();
-//	}
+	moveBall();
+	drawPaddle();
+	drawBall();
+	setLvl();
 	updateCounters();
 }
 gameLoop();
