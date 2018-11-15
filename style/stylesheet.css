@@ -73,14 +73,23 @@ p:hover {
     
 #main-menu {
     font-size: 5vh;
-    margin-top: 20vh;
+    margin-top: 17vh;
 }
 
 .options {
     display: none;
     text-align: left;
 }
-    
+
+#highscore {
+    margin-top: 5vh;
+}
+
+#score-scroll{
+    overflow-y:scroll;
+    height: 40vh;
+}
+
 #controlls {
     margin-top: 7vh;
 }
@@ -139,27 +148,28 @@ input[type="radio"]:checked+label span {
 
 /************ Gameplay Menu *************/
 
-#gameplay_menu{
+#gameplay-menu{
     position: fixed;
     top: 5%;
     width: 100%;
 }
 
 #bck_to_menu {
-    width: 20%;
+    width: 30%;
     margin-left: 5%;
     display: inline-block;
 }
     
 #options{
-    width: 50%;
+    width: 30%;
     text-align: center;
     display: inline-block;
 }
 
 #pause{
-    float: right;
-    margin-right: 5%;
+    width: 30%;
+    position: fixed;
+    top: 5%;
+    right: 5%;
     text-align: right;
-    display: inline-block;
 }

@@ -30,6 +30,5 @@ function updateCounters() {
 		c.translate(W/2-H/3.7, 0);
 		c.fillText("TAP TO START", 0, H * 0.94);
 		c.translate(-W/2+H/3.7, 0);
-
 	}
 }

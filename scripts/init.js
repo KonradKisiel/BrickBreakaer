@@ -1,4 +1,5 @@
 var c = canvas.getContext('2d');
+c.canvas.height = window.innerHeight;
 
 //adjust width to device 
 if(window.innerHeight / window.innerWidth > 1){

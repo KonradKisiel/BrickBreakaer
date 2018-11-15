@@ -6,6 +6,8 @@
 	<title>arKanoid</title>
 	<meta author="Konrad Kisiel">
 	<meta name="viewport" content="user-scalable=no"/>
+	<!-- https://stackoverflow.com/questions/1330825/preloading-font-face-fonts -->
+	<!--<link rel="preload" href="fontUrl" as="font" type="font/woff2" crossorigin>-->
 	<link href="style/stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -16,9 +18,27 @@
 		<div id="menus">
 			<h1 id="menu-heading">arKanoid</h1>
 			<div id="main-menu">
-				<a id="play-continue" href="gameplay.html" onclick="start_game()">Play</a>
+				<a id="play-continue" href="gameplay.html">Play</a>
+				<p onclick="scoreboard()">Scoreboard</p>
 				<p onclick="controls()">Controls</p>
 				<p onclick="sound()">Sound</p>
+			</div>
+			<div class="options" id="scoreboard">
+			<h2>Scoreboard</h2>
+				<div id="score-scroll">
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+				</div>
+				<p onclick="bck_main()">&lt BACK</p>
 			</div>
 			<div id="controlls" class="options">
 				<form>
@@ -69,6 +89,6 @@
 	<script src="scripts/init.js"></script>
 	<script src="scripts/counters.js"></script>
 	<script src="scripts/draw.js"></script>
-	<script src="scripts/menu.js"></script>
+	<script src="scripts/mainMenu.js"></script>
 </body>
 </html>
