@@ -75,31 +75,21 @@ else {
 
     document.addEventListener('keyup', function (e) {
         if (keyboard) {
-            if (e.keyCode == 32 && ballStartPsn) {
-                releaseBall();
+            if (e.keyCode == 32 && balls[0].ballStartPsn) {
+                balls[0].releaseBall();
             }
         }
     }, false);
 
 }
 document.addEventListener("click", function (e) {
-    if (!keyboard) {
-        if (ballStartPsn) {
-            releaseBall();
-        }
+    if (!keyboard&&balls[0].ballStartPsn) {
+            balls[0].releaseBall();
     }
 }, false);
 
 //limit paddle move for keyboard and tilt
 function movePaddle() {
-/*
-    // If paddle reaches the ends of ball, then don't let it move 
-    if (BallDeltaY == 0) {
-        if (PaddleX + PaddleDeltaX < W / 2 - PaddleW || PaddleX + PaddleDeltaX + PaddleW > W / 2 + PaddleW) {
-            PaddleDeltaX = 0;
-        }
-    }
-*/
     // If paddle reaches the ends, then don't let it move 
     if (PaddleDeltaX + PaddleX < bordersOffset){
         PaddleX = bordersOffset;

@@ -12,7 +12,7 @@ function setLvl(){
 			winGame();
 		//set up a new level
 		}else{
-			startBall();
+			balls = balls.slice(0, 1);
 			score = score + 10;
 			lives = lives + 2;
 			//take new lvl array

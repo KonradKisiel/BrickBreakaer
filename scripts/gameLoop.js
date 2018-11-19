@@ -20,15 +20,16 @@ function updateGameLoop() {
 	animLoop = requestAnimationFrame(gameLoop);
 }
 
-startBall();
 function gameLoop() {
 	updateGameLoop();
 	movePaddle();
 	drawGameBox();
-	moveBall();
-	drawPaddle();
-	drawBall();
 	setLvl();
+	balls.forEach(function(element){
+		element.moveBall();
+		element.drawBall();
+	});
+	drawPaddle();
 	updateCounters();
 }
 gameLoop();
