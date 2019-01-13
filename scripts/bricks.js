@@ -5,6 +5,9 @@ var brickHeight = PaddleH;
 var brickWidth = W / bricksRow;
 var brickX;
 var brickY;
+var PowerupX;
+var PowerupY;
+var randNbr;
 
 // draw a single brick
 function drawSingleBrick(x, y, brickType) {
@@ -38,7 +41,7 @@ function drawBricks(bricksArray) {
     }
 }
 
-function weakenBrick(x, y, brickWidth, brickHeight) {
+function weakenBrick(x, y, brickX, brickY) {
 	// First weaken the brick (0 means brick has gone)
 	bricksArray[x][y]--;
 
@@ -46,12 +49,12 @@ function weakenBrick(x, y, brickWidth, brickHeight) {
 		// The brick is weakened but still around. Give a single point.
 		score++;
 	} else {
-		/*
-		if(Math.random()*100>50){
-            //extraBall(i, j);
-			balls.push(new Ball(BallSpeed, BallX, BallY, BallR, BallDeltaY, BallDeltaX, ballStartPsn));
-		}
-		*/
+        randNbr = Math.round(Math.random()*4);
+        if(randNbr>2){
+            PowerupX = brickX+brickWidth/2;
+            PowerupY = brickY-brickHeight/2;    
+            CreatePowerup(PowerupX, PowerupY, randNbr);
+        }
 		// give player an extra point when the brick disappears
 		score += 2;
 		play_sound(delbrick_s);

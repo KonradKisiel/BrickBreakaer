@@ -45,4 +45,16 @@ c.strokeStyle = "rgb(0, 0, 0)";
 //line width
 c.lineWidth = H / 600;
 
+//game speed
+var GameSpeed = H / 500;
+
+function removeElementFromArray(element, array){
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == element) {
+            array.splice(i, 1);
+            i--;
+        }
+    }
+}
+
 

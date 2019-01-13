@@ -25,9 +25,13 @@ function gameLoop() {
 	movePaddle();
 	drawGameBox();
 	setLvl();
-	balls.forEach(function(element){
+	Balls.forEach(function(element){
 		element.moveBall();
 		element.drawBall();
+	});
+	Powerups.forEach(function(element){
+		element.movePowerup();
+		element.drawPowerup();
 	});
 	drawPaddle();
 	updateCounters();

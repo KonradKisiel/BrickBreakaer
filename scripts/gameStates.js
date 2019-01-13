@@ -12,13 +12,15 @@ function setLvl(){
 			winGame();
 		//set up a new level
 		}else{
-			balls = balls.slice(0, 1);
+			Balls[0].startBall();
+			Balls = Balls.slice(0, 1);
 			score = score + 10;
 			lives = lives + 2;
 			//take new lvl array
 			bricksArray = lvls[lvlCounter];
 			PaddleW = H / 6 - PaddleW / 9;
-			BallSpeed = BallSpeed + PaddleW / 1000;
+			//increase game speed
+			GameSpeed = GameSpeed + PaddleW / 1000;
 			play_sound(brick_s);
 		}
 	}
@@ -44,7 +46,7 @@ function updateCounters() {
 	c.fillText(+lives, W / 1.19, H / 25);
 
 	// start conditions
-	if (ballStartPsn && startBool) {
+	if (BallStartPsn && startBool) {
 		c.font = H/ 14 + "px LCDPHONE";
 		c.fillStyle = "rgb(255, 128, 0)";
 		//center text
@@ -66,7 +68,7 @@ function endGame() {
 	c.fillText("GAME OVER", 0, H * 0.94);
 	c.translate(-W/2+H/4.9, 0);
 	// stop playing music
-	soundtrack.pause();
+	soundtrackBool = false;
 	play_sound(gameOver_s);
 	//stop gameLoop
 	animLoop = cancelAnimationFrame(animLoop);
@@ -78,7 +80,7 @@ function winGame() {
 	c.translate(W/2-H/6.5, 0)
 	c.fillText("YOU WIN", 0, H * 0.94);
 	c.translate(-W/2+H/6.5, 0);
-	soundtrack.pause();
+	soundtrackBool = false;
 	play_sound(win_s);
 	//stop gameLoop
 	animLoop = cancelAnimationFrame(animLoop);

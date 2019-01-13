@@ -1,6 +1,4 @@
 //***************** Ball Settings ******************
-//speed
-var BallSpeed = H / 500;
 //vertical start psn
 var BallX = W / 2;
 //horizontal start psn
@@ -12,22 +10,20 @@ var BallDeltaY = 0;
 //initial orizontal ball speed
 var BallDeltaX = 0;
 //ball on start psn
-var ballStartPsn = true;
+var BallStartPsn = true;
 //create first ball
-var ball = new Ball(BallSpeed, BallX, BallY, BallR, BallDeltaY, BallDeltaX, ballStartPsn);
+var ball = new Ball(GameSpeed, BallX, BallY, BallR, BallDeltaY, BallDeltaX, BallStartPsn);
 //array to store all active balls
-var balls = [ball];
-var lastBall;
-//balls.push(new Ball(BallSpeed, BallX+3*BallR, BallY, BallR, 4, BallDeltaX, false));
+var Balls = [ball];
+//balls.push(new Ball(GameSpeed, BallX+3*BallR, BallY, BallR, 4, BallDeltaX, false));
 
-function Ball(BallSpeed, BallX, BallY, BallR, BallDeltaY, BallDeltaX, ballStartPsn) {
-	this.BallSpeed = BallSpeed;
+function Ball() {
 	this.BallX = BallX;
 	this.BallY = BallY;
 	this.BallR = BallR;
 	this.BallDeltaY = BallDeltaY;
 	this.BallDeltaX = BallDeltaX;
-	this.ballStartPsn = ballStartPsn;
+	this.BallStartPsn = BallStartPsn;
 }
 
 Ball.prototype.drawBall = function () {
@@ -46,7 +42,7 @@ Ball.prototype.startBall = function () {
 	this.PaddleDeltaX = 0;
 	this.BallX = BallX; // W / 2 + PaddleDeltaX;
 	this.BallY = BallY; // H - bottomInfoArea - W / 8;
-	this.ballStartPsn = true;
+	this.BallStartPsn = true;
 	this.PaddleX = W / 2 - PaddleW / 2;
 }
 
@@ -54,7 +50,7 @@ Ball.prototype.startBall = function () {
 Ball.prototype.releaseBall = function () {
 	this.BallDeltaY = 4;
 	this.BallDeltaX = 0;
-	this.ballStartPsn = false;
+	this.BallStartPsn = false;
 }
 
 //handle ball actions
@@ -69,24 +65,25 @@ Ball.prototype.moveBall = function () {
 		drawTopBorder();
 		play_sound(brick_s);
 	}
-	// If the bottom of the Ball touches the bottom of the screen then end the game
+
 	if (this.BallY + this.BallDeltaY + this.BallR > H - bottomInfoArea - bordersOffset) {
 		if (lives > 0) {
-			drawBottomBorder();
-			play_sound(liveloss_s);
-			if (balls.length > 1) {
-
-				for (var i = 0; i < balls.length; i++) {
-					if (balls[i] == this) {
-						balls.splice(i, 1);
+			if (Balls.length > 1) {
+				//remove this ball
+				//removeElementFromArray(this, Balls);
+				for (var i = 0; i < Balls.length; i++) {
+					if (Balls[i] == this) {
+						Balls.splice(i, 1);
 						i--;
 					}
 				}
 			} else {
 				lives--;
 				//if there is only one ball set it on start psn
-				balls[0].startBall();
+				Balls[0].startBall();
 			}
+			drawBottomBorder();
+			play_sound(liveloss_s);
 		}
 		else {
 			endGame();
@@ -127,19 +124,19 @@ Ball.prototype.moveBall = function () {
 				brickY = i * brickHeight;
 				if (
 					// touch from left
-					((this.BallX + this.BallDeltaX * BallSpeed + this.BallR >= brickX) &&
+					((this.BallX + this.BallDeltaX * GameSpeed + BallR >= brickX) &&
 						(this.BallX + this.BallR <= brickX))
 					||
 					// touch from right
-					((this.BallX + this.BallDeltaX * BallSpeed - this.BallR <= brickX + brickWidth) &&
+					((this.BallX + this.BallDeltaX * GameSpeed - BallR <= brickX + brickWidth) &&
 						(this.BallX - this.BallR >= brickX + brickWidth))
 				) {
-					if ((this.BallY + this.BallDeltaY * BallSpeed - this.BallR <= brickY + brickHeight) &&
-						(this.BallY + this.BallDeltaY * BallSpeed + this.BallR >= brickY)) {
+					if ((this.BallY + this.BallDeltaY * GameSpeed - BallR <= brickY + brickHeight) &&
+						(this.BallY + this.BallDeltaY * GameSpeed + BallR >= brickY)) {
 						//change ball direction
 						this.BallDeltaY = - this.BallDeltaY;
 						// weaken brick and increase score
-						weakenBrick(i, j);
+						weakenBrick(i, j, brickX, brickY);
 					}
 				}
 			}
@@ -149,22 +146,22 @@ Ball.prototype.moveBall = function () {
 	for (var i = 0; i < bricksArray.length; i++) {
 		for (var j = 0; j < bricksArray[i].length; j++) {
 			if (bricksArray[i][j]) { // if brick is still visible
-				var brickX = j * brickWidth;
-				var brickY = i * brickHeight;
+				brickX = j * brickWidth;
+				brickY = i * brickHeight;
 				if (
 					// barely touching from below
-					((this.BallY + this.BallDeltaY * BallSpeed - this.BallR <= brickY + brickHeight) &&
+					((this.BallY + this.BallDeltaY * GameSpeed - this.BallR <= brickY + brickHeight) &&
 						(this.BallY - this.BallR >= brickY + brickHeight))
 					||
 					// barely touching from above
-					((this.BallY + this.BallDeltaY * BallSpeed + this.BallR >= brickY) &&
+					((this.BallY + this.BallDeltaY * GameSpeed + this.BallR >= brickY) &&
 						(this.BallY + this.BallR <= brickY))) {
-					if (this.BallX + this.BallDeltaX * BallSpeed + this.BallR >= brickX &&
-						this.BallX + this.BallDeltaX * BallSpeed - this.BallR <= brickX + brickWidth) {
+					if (this.BallX + this.BallDeltaX * GameSpeed + this.BallR >= brickX &&
+						this.BallX + this.BallDeltaX * GameSpeed - this.BallR <= brickX + brickWidth) {
 						//change ball direction
 						this.BallDeltaY = - this.BallDeltaY;
 						// weaken brick and increase score
-						weakenBrick(i, j);
+						weakenBrick(i, j, brickX, brickY);
 					}
 				}
 			}
@@ -172,7 +169,7 @@ Ball.prototype.moveBall = function () {
 	}
 
 	// Move the Ball
-	this.BallX = this.BallX + this.BallDeltaX * BallSpeed;
-	this.BallY = this.BallY + this.BallDeltaY * BallSpeed;
+	this.BallX = this.BallX + this.BallDeltaX * GameSpeed;
+	this.BallY = this.BallY + this.BallDeltaY * GameSpeed;
 }
 

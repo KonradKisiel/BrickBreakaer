@@ -11,10 +11,10 @@ function topCountersAreas(){
 	//Counters description
 	c.font = H / 21 + "px PipeDream";
 	c.fillStyle = "rgb(0, 102, 204)";
-	c.fillText("Score: ", bordersOffset/2, H / 24);
-	c.fillText("Lives: ", W * 0.6, H / 24);
-	c.strokeText("Score: ", bordersOffset/2, H / 24);
-	c.strokeText("Lives: ", W * 0.6, H / 24);
+	c.fillText("Score ", bordersOffset/2, H / 24);
+	c.fillText("Lives ", W * 0.6, H / 24);
+	c.strokeText("Score ", bordersOffset/2, H / 24);
+	c.strokeText("Lives ", W * 0.6, H / 24);
 }
 
 function updateCounters() {

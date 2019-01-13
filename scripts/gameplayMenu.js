@@ -1,5 +1,7 @@
 var startBool = false;
 var pauseBool = false;
+//to stop soundtrack on game events
+var soundtrackBool = true;
 var pauseDIV = document.getElementById("pause");
 
 document.getElementById('menus').style = "display:none";
@@ -21,7 +23,7 @@ function play_sound(sound) {
 	} else {
 		sound.pause();
 	}
-	if (document.getElementById("music").checked) {
+	if (document.getElementById("music").checked&&soundtrackBool) {
 		soundtrack.play();
 	} else {
 		soundtrack.pause();

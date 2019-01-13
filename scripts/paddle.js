@@ -75,16 +75,16 @@ else {
 
     document.addEventListener('keyup', function (e) {
         if (keyboard) {
-            if (e.keyCode == 32 && balls[0].ballStartPsn) {
-                balls[0].releaseBall();
+            if (e.keyCode == 32 && balls[0].BallStartPsn) {
+                Balls[0].releaseBall();
             }
         }
     }, false);
 
 }
 document.addEventListener("click", function (e) {
-    if (!keyboard&&balls[0].ballStartPsn) {
-            balls[0].releaseBall();
+    if (!keyboard&&Balls[0].BallStartPsn) {
+        Balls[0].releaseBall();
     }
 }, false);
 
